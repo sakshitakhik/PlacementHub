@@ -1,0 +1,205 @@
+<div class="job-details-page">
+
+    @if (isLoading) {
+    <div class="state-box">
+        <p>Loading job details...</p>
+    </div>
+    }
+
+    @if (errorMessage) {
+    <div class="state-box error">
+        <p>{{ errorMessage }}</p>
+
+        <a routerLink="/jobs" class="back-link">
+            ← Back to Jobs
+        </a>
+    </div>
+    }
+
+    @if (job) {
+
+    <div class="details-container">
+
+        <a routerLink="/jobs" class="back-link">
+            ← Back to Jobs
+        </a>
+
+        <div class="job-header-card">
+
+            <div class="company-logo">
+                {{ job.company.name.charAt(0) }}
+            </div>
+
+            <div class="job-heading">
+
+                <div class="status-row">
+                    <span class="status">
+                        {{ job.status }}
+                    </span>
+                </div>
+
+                <h1>{{ job.title }}</h1>
+
+                <p class="company-name">
+                    {{ job.company.name }}
+                </p>
+
+                <div class="quick-info">
+
+                    <span>
+                        📍 {{ job.location }}
+                    </span>
+
+                    <span>
+                        💼 {{ job.employmentType }}
+                    </span>
+
+                    <span>
+                        🎓 {{ job.experienceRequired }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="details-layout">
+
+            <main class="main-content">
+
+                <section class="content-card">
+
+                    <h2>Job Description</h2>
+
+                    <p class="description">
+                        {{ job.description }}
+                    </p>
+
+                </section>
+
+
+                <section class="content-card">
+
+                    <h2>Job Requirements</h2>
+
+                    <div class="requirements">
+
+                        <div class="requirement">
+                            <span class="requirement-label">
+                                Minimum CGPA
+                            </span>
+
+                            <strong>
+                                {{ job.minCgpa }}
+                            </strong>
+                        </div>
+
+                        <div class="requirement">
+                            <span class="requirement-label">
+                                Graduation Year
+                            </span>
+
+                            <strong>
+                                {{ job.graduationYear }}
+                            </strong>
+                        </div>
+
+                        <div class="requirement">
+                            <span class="requirement-label">
+                                Experience
+                            </span>
+
+                            <strong>
+                                {{ job.experienceRequired }}
+                            </strong>
+                        </div>
+
+                        <div class="requirement">
+                            <span class="requirement-label">
+                                Employment Type
+                            </span>
+
+                            <strong>
+                                {{ job.employmentType }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <section class="content-card">
+
+                    <h2>About {{ job.company.name }}</h2>
+
+                    <p class="description">
+                        {{ job.company.description }}
+                    </p>
+
+                    <div class="company-info">
+
+                        <span>
+                            Industry:
+                            <strong>{{ job.company.industry }}</strong>
+                        </span>
+
+                        <span>
+                            Location:
+                            <strong>{{ job.company.location }}</strong>
+                        </span>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+
+            <aside class="sidebar">
+
+                <div class="apply-card">
+
+                    <h2>Ready to Apply?</h2>
+
+                    <p>
+                        Take the next step toward your career.
+                    </p>
+
+                    <a [routerLink]="['/jobs', job.jobId, 'apply']" class="apply-button">
+                        Apply Now
+                    </a>
+
+                    <p class="deadline">
+                        Application Deadline
+                        <strong>
+                            {{ job.applicationDeadline }}
+                        </strong>
+                    </p>
+
+                </div>
+
+
+                <div class="salary-card">
+
+                    <span>Salary Range</span>
+
+                    <strong>
+                        ₹{{ job.salaryMin | number }}
+                        -
+                        ₹{{ job.salaryMax | number }}
+                    </strong>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+    }
+
+</div>

@@ -1,0 +1,279 @@
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <span class="brand-icon">P</span>
+      <span>Placement<span>Hub</span></span>
+    </div>
+
+    <nav class="nav-menu">
+
+      <a class="nav-item active">
+        <span>⌂</span>
+        Dashboard
+      </a>
+
+      <a class="nav-item">
+        <span>⌕</span>
+        Find Jobs
+      </a>
+
+      <a class="nav-item">
+        <span>▣</span>
+        My Applications
+      </a>
+
+      <a class="nav-item">
+        <span>♙</span>
+        My Profile
+      </a>
+
+      <a class="nav-item">
+        <span>♧</span>
+        Notifications
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <a class="nav-item">
+        <span>⚙</span>
+        Settings
+      </a>
+
+      <button class="logout-btn" (click)="logout()">
+        <span>↪</span>
+        Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+      <div>
+        <span class="page-label">STUDENT PORTAL</span>
+        <h1>Dashboard</h1>
+      </div>
+
+      <div class="topbar-right">
+
+        <button class="notification-btn">
+          ♧
+          <span class="notification-dot"></span>
+        </button>
+
+        <div class="user-info">
+
+          <div class="avatar">
+            {{ user?.name?.charAt(0)?.toUpperCase() }}
+          </div>
+
+          <div>
+            <strong>{{ user?.name }}</strong>
+            <small>Student</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- WELCOME -->
+    <section class="welcome-section">
+
+      <div>
+
+        <span class="welcome-label">
+          WELCOME BACK
+        </span>
+
+        <h2>
+          Hello, {{ user?.name }} <span>👋</span>
+        </h2>
+
+        <p>
+          Here’s what’s happening with your placement journey.
+        </p>
+
+      </div>
+
+      <div class="welcome-shape">
+        <span>✦</span>
+      </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+    <section class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-icon applications">
+          ▣
+        </div>
+
+        <div>
+          <span>APPLICATIONS</span>
+          <h3>0</h3>
+          <p>Total applications</p>
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon interviews">
+          ◷
+        </div>
+
+        <div>
+          <span>INTERVIEWS</span>
+          <h3>0</h3>
+          <p>Upcoming interviews</p>
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon shortlisted">
+          ★
+        </div>
+
+        <div>
+          <span>SHORTLISTED</span>
+          <h3>0</h3>
+          <p>Shortlisted applications</p>
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon profile">
+          ◉
+        </div>
+
+        <div>
+          <span>PROFILE</span>
+          <h3>70%</h3>
+          <p>Profile completed</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- JOBS -->
+    <section class="jobs-section">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-label">
+            OPPORTUNITIES
+          </span>
+
+          <h2>Recommended jobs</h2>
+        </div>
+
+        <a class="view-all" routerLink="/jobs">
+  View all →
+</a>
+
+      </div>
+
+
+      <div class="job-list">
+
+        <!-- JOB 1 -->
+        <article class="job-card">
+
+          <div class="company-logo">
+            I
+          </div>
+
+          <div class="job-details">
+
+            <span class="job-type">
+              FULL TIME
+            </span>
+
+            <h3>Software Developer</h3>
+
+            <p>
+              Infosys · Pune
+            </p>
+
+            <div class="job-meta">
+              <span>₹4.5 – 7 LPA</span>
+              <span>•</span>
+              <span>IT / Software</span>
+            </div>
+
+          </div>
+
+          <button class="apply-btn">
+            View Job →
+          </button>
+
+        </article>
+
+
+        <!-- JOB 2 -->
+        <article class="job-card">
+
+          <div class="company-logo tcs">
+            T
+          </div>
+
+          <div class="job-details">
+
+            <span class="job-type">
+              FULL TIME
+            </span>
+
+            <h3>Graduate Engineer</h3>
+
+            <p>
+              Tata Consultancy Services · Pune
+            </p>
+
+            <div class="job-meta">
+              <span>₹4 – 6 LPA</span>
+              <span>•</span>
+              <span>Engineering</span>
+            </div>
+
+          </div>
+
+          <button class="apply-btn">
+            View Job →
+          </button>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

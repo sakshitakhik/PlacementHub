@@ -1,0 +1,146 @@
+<div class="apply-page">
+
+  @if (isLoading) {
+    <div class="state-message">
+      <div class="loader"></div>
+      <p>Loading job details...</p>
+    </div>
+  }
+
+  @if (errorMessage && !isLoading) {
+    <div class="state-message error">
+      <p>{{ errorMessage }}</p>
+      <a routerLink="/jobs">← Back to Jobs</a>
+    </div>
+  }
+
+  @if (successMessage) {
+    <div class="success-box">
+      <div class="success-icon">✓</div>
+      <h2>Application Submitted!</h2>
+      <p>{{ successMessage }}</p>
+      <p class="redirect-text">Taking you to your dashboard...</p>
+    </div>
+  }
+
+  @if (!isLoading && !errorMessage && job && !successMessage) {
+
+    <div class="page-header">
+      <a [routerLink]="['/jobs', job.jobId]" class="back-link">
+        ← Back to Job Details
+      </a>
+
+      <h1>Apply for this position</h1>
+      <p>Complete your application below.</p>
+    </div>
+
+    <div class="application-layout">
+
+      <!-- Job Summary -->
+      <div class="job-summary">
+
+        <div class="company-logo">
+          {{ job.company.name.charAt(0) }}
+        </div>
+
+        <h2>{{ job.title }}</h2>
+        <p class="company-name">{{ job.company.name }}</p>
+
+        <div class="job-info">
+          <div>
+            <span>📍</span>
+            <span>{{ job.location }}</span>
+          </div>
+
+          <div>
+            <span>💼</span>
+            <span>{{ job.employmentType }}</span>
+          </div>
+
+          <div>
+            <span>₹</span>
+            <span>
+              {{ job.salaryMin / 100000 | number:'1.1-1' }} -
+              {{ job.salaryMax / 100000 | number:'1.1-1' }} LPA
+            </span>
+          </div>
+        </div>
+
+        <div class="deadline">
+          <span>Application Deadline</span>
+          <strong>{{ job.applicationDeadline }}</strong>
+        </div>
+
+      </div>
+
+      <!-- Application Form -->
+      <div class="application-card">
+
+        <div class="card-header">
+          <h2>Your Application</h2>
+          <p>Tell the recruiter why you're a good fit for this role.</p>
+        </div>
+
+        <div class="applicant-info">
+          <div class="avatar">
+            {{ user?.name?.charAt(0) }}
+          </div>
+
+          <div>
+            <strong>{{ user?.name }}</strong>
+            <span>{{ user?.email }}</span>
+          </div>
+        </div>
+
+        <form (ngSubmit)="submitApplication()">
+
+          <div class="form-group">
+            <label for="coverLetter">
+              Cover Letter <span>*</span>
+            </label>
+
+            <textarea
+              id="coverLetter"
+              name="coverLetter"
+              [(ngModel)]="coverLetter"
+              rows="8"
+              placeholder="Introduce yourself and explain why you are interested in this position..."
+              required>
+            </textarea>
+
+            <div class="character-count">
+              {{ coverLetter.length }} characters
+            </div>
+          </div>
+
+          @if (errorMessage) {
+            <div class="form-error">
+              {{ errorMessage }}
+            </div>
+          }
+
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="isSubmitting">
+
+            @if (isSubmitting) {
+              Submitting...
+            } @else {
+              Submit Application →
+            }
+
+          </button>
+
+          <p class="privacy-note">
+            By submitting this application, you confirm that the information
+            provided is accurate.
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+  }
+</div>

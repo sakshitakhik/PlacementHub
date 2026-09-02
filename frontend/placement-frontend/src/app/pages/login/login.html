@@ -1,0 +1,160 @@
+<div class="login-page">
+
+    <!-- LEFT SIDE -->
+    <section class="login-info">
+
+        <div class="info-content">
+
+            <a routerLink="/" class="brand">
+                <span class="brand-icon">P</span>
+                <span>Placement<span>Hub</span></span>
+            </a>
+
+            <div class="info-main">
+
+                <span class="eyebrow">
+                    WELCOME BACK
+                </span>
+
+                <h1>
+                    Your next
+                    <span>opportunity</span>
+                    is waiting.
+                </h1>
+
+                <p>
+                    Sign in to discover jobs, manage your applications
+                    and stay connected with recruiters.
+                </p>
+
+            </div>
+
+            <div class="info-footer">
+                <span>Students</span>
+                <span>Recruiters</span>
+                <span>Opportunities</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="login-form-section">
+
+        <div class="login-card">
+
+            <div class="mobile-brand">
+                <a routerLink="/" class="brand">
+                    <span class="brand-icon">P</span>
+                    <span>Placement<span>Hub</span></span>
+                </a>
+            </div>
+
+            <div class="form-heading">
+
+                <span class="form-label">
+                    ACCOUNT LOGIN
+                </span>
+
+                <h2>
+                    Welcome back
+                </h2>
+
+                <p>
+                    Enter your details to continue.
+                </p>
+
+            </div>
+
+
+            <form (ngSubmit)="login()">
+
+                <!-- EMAIL -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email address
+                    </label>
+                    <input id="email" type="email" name="email" [(ngModel)]="email" placeholder="Enter your email">
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+
+                    <div class="label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a href="javascript:void(0)">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <input id="password" type="password" name="password" [(ngModel)]="password"
+                        placeholder="Enter your password">
+
+                </div>
+
+
+                <!-- REMEMBER -->
+                <div class="remember">
+
+                    <label>
+                        <input type="checkbox">
+                        <span>Remember me</span>
+                    </label>
+
+                </div>
+
+
+                <!-- LOGIN -->
+                <button type="submit" class="login-button" [disabled]="isLoading">
+
+                    {{ isLoading ? 'Signing in...' : 'Sign In →' }}
+
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER -->
+            <div class="register-text">
+
+                Don't have an account?
+
+                <a routerLink="/register">
+                    Create one
+                </a>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+
+            <div class="account-options">
+
+                <p>
+                    Are you a recruiter?
+                </p>
+
+                <a routerLink="/register">
+                    Create a recruiter account →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

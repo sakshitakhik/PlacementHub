@@ -1,0 +1,117 @@
+<div class="jobs-page">
+
+    <div class="jobs-header">
+        <div>
+            <span class="page-label">PLACEMENTHUB</span>
+            <h1>Find Your Next Opportunity</h1>
+            <p>Explore job opportunities and find the right career for you.</p>
+        </div>
+    </div>
+
+    <div class="jobs-content">
+
+        @if (isLoading) {
+        <div class="loading">
+            Loading available jobs...
+        </div>
+        }
+
+        @if (errorMessage) {
+        <div class="error">
+            {{ errorMessage }}
+        </div>
+        }
+
+        @if (!isLoading && !errorMessage && jobs.length === 0) {
+        <div class="no-jobs">
+            No jobs are currently available.
+        </div>
+        }
+
+        @if (!isLoading && !errorMessage && jobs.length > 0) {
+
+        <div class="job-grid">
+
+            @for (job of jobs; track job.jobId) {
+
+            <div class="job-card">
+
+                <div class="job-card-top">
+
+                    <div class="company-logo">
+                        {{ job.company.name.charAt(0) }}
+                    </div>
+
+                    <span class="job-status">
+                        {{ job.status }}
+                    </span>
+
+                </div>
+
+                <h2>{{ job.title }}</h2>
+
+                <p class="company-name">
+                    {{ job.company.name }}
+                </p>
+
+                <div class="job-info">
+
+                    <span>
+                        📍 {{ job.location }}
+                    </span>
+
+                    <span>
+                        💼 {{ job.employmentType }}
+                    </span>
+
+                    <span>
+                        🎓 Min CGPA: {{ job.minCgpa }}
+                    </span>
+
+                </div>
+
+                <div class="job-details">
+
+                    <div>
+                        <small>Salary</small>
+
+                        <strong>
+                            ₹{{ job.salaryMin | number }}
+                            -
+                            ₹{{ job.salaryMax | number }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <small>Experience</small>
+
+                        <strong>
+                            {{ job.experienceRequired }}
+                        </strong>
+                    </div>
+
+                </div>
+
+                <div class="job-footer">
+
+                    <span>
+                        Deadline: {{ job.applicationDeadline }}
+                    </span>
+
+                    <a [routerLink]="['/jobs', job.jobId]" class="view-job">
+                        View Job →
+                    </a>
+
+                </div>
+
+            </div>
+
+            }
+
+        </div>
+
+        }
+
+    </div>
+
+</div>

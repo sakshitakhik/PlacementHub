@@ -1,0 +1,423 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  background: #f7f5ed;
+}
+
+
+/* =========================
+   LEFT SIDE
+========================= */
+
+.login-info {
+  position: relative;
+  overflow: hidden;
+  background: #245c45;
+  color: white;
+  padding: 45px;
+}
+
+.login-info::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: #d46a45;
+  opacity: 0.12;
+  right: -150px;
+  top: -100px;
+}
+
+.login-info::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: #e6d8bd;
+  opacity: 0.08;
+  left: -120px;
+  bottom: -80px;
+}
+
+.info-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================
+   BRAND
+========================= */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: #245c45;
+  border-radius: 9px;
+  font-weight: 800;
+}
+
+.brand > span:last-child > span {
+  color: #e6b29d;
+}
+
+
+/* =========================
+   LEFT CONTENT
+========================= */
+
+.info-main {
+  margin: auto 0;
+  max-width: 480px;
+}
+
+.eyebrow,
+.form-label {
+  color: #e6b29d;
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  font-weight: 700;
+}
+
+.info-main h1 {
+  margin: 18px 0;
+  font-size: clamp(45px, 5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+}
+
+.info-main h1 span {
+  display: block;
+  color: #e6b29d;
+}
+
+.info-main p {
+  max-width: 410px;
+  color: #c8d5ce;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.info-footer {
+  display: flex;
+  gap: 25px;
+  color: #b5c7bd;
+  font-size: 11px;
+}
+
+.info-footer span::before {
+  content: "•";
+  color: #d46a45;
+  margin-right: 7px;
+}
+
+
+/* =========================
+   FORM SIDE
+========================= */
+
+.login-form-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background: #f7f5ed;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+}
+
+
+/* =========================
+   MOBILE BRAND
+========================= */
+
+.mobile-brand {
+  display: none;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.form-heading {
+  margin-bottom: 35px;
+}
+
+.form-heading h2 {
+  margin: 10px 0 7px;
+  color: #18352a;
+  font-size: 38px;
+  letter-spacing: -1px;
+}
+
+.form-heading p {
+  margin: 0;
+  color: #78847d;
+  font-size: 14px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #30463c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-row a {
+  color: #d46a45;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  height: 50px;
+  padding: 0 15px;
+  border: 1px solid #ddd9cf;
+  border-radius: 7px;
+  background: white;
+  color: #18352a;
+  outline: none;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #245c45;
+  box-shadow: 0 0 0 3px rgba(36, 92, 69, 0.08);
+}
+
+.form-group input::placeholder {
+  color: #a2a9a4;
+}
+
+
+/* =========================
+   REMEMBER
+========================= */
+
+.remember {
+  margin: 3px 0 23px;
+}
+
+.remember label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #68756e;
+  font-size: 12px;
+}
+
+.remember input {
+  accent-color: #245c45;
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 7px;
+  background: #245c45;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  transition: 0.25s;
+}
+
+.login-button:hover {
+  background: #183f30;
+}
+
+.login-button span {
+  font-size: 18px;
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+.register-text {
+  text-align: center;
+  margin-top: 22px;
+  color: #7a847e;
+  font-size: 12px;
+}
+
+.register-text a {
+  color: #245c45;
+  font-weight: 700;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  background: #e0ddd4;
+  flex: 1;
+}
+
+.divider span {
+  color: #a0a7a2;
+  font-size: 9px;
+}
+
+
+/* =========================
+   ACCOUNT OPTIONS
+========================= */
+
+.account-options {
+  padding: 17px;
+  background: #eeece4;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.account-options p {
+  margin: 0 0 7px;
+  color: #68756e;
+  font-size: 11px;
+}
+
+.account-options a {
+  color: #245c45;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .login-info {
+    display: none;
+  }
+
+  .login-form-section {
+    min-height: 100vh;
+    padding: 35px 25px;
+  }
+
+  .mobile-brand {
+    display: block;
+    margin-bottom: 55px;
+  }
+
+  .mobile-brand .brand {
+    color: #18352a;
+  }
+
+  .mobile-brand .brand-icon {
+    background: #245c45;
+    color: white;
+  }
+
+  .mobile-brand .brand > span:last-child > span {
+    color: #d46a45;
+  }
+}
+
+
+@media (max-width: 500px) {
+
+  .login-form-section {
+    padding: 25px 20px;
+  }
+
+  .mobile-brand {
+    margin-bottom: 45px;
+  }
+
+  .form-heading h2 {
+    font-size: 32px;
+  }
+}
