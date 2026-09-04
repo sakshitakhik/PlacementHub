@@ -42,6 +42,10 @@ public class ApplicationService {
     public List<Application> getAllApplications() {
         return applicationRepository.findAll();
     }
+    
+    public List<Application> getApplicationsByStudentId(Long studentId) {
+        return applicationRepository.findByStudent_StudentId(studentId);
+    }
 
     // Get application by ID
     public Application getApplicationById(Long id) {

@@ -29,7 +29,13 @@ public class ApplicationController {
 
         return applicationService.saveApplication(application);
     }
+ // Get applications by student ID
+    @GetMapping("/applications/student/{studentId}")
+    public List<Application> getApplicationsByStudentId(
+            @PathVariable("studentId") Long studentId) {
 
+        return applicationService.getApplicationsByStudentId(studentId);
+    }
     // Get all applications
     @GetMapping("/applications")
     public List<Application> getAllApplications() {

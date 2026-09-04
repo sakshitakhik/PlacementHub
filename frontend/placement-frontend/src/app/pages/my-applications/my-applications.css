@@ -1,0 +1,280 @@
+.applications-page {
+    min-height: 100vh;
+    padding: 45px 7%;
+    background: #f8f5ed;
+}
+
+/* Header */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.eyebrow {
+    color: #8c4a32;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.page-header h1 {
+    margin: 8px 0 6px;
+    color: #24452f;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin: 0;
+    color: #6f756f;
+    font-size: 15px;
+}
+
+/* Buttons */
+
+.browse-button {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #2f5d3a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.browse-button:hover {
+    background: #244a2e;
+    transform: translateY(-1px);
+}
+
+/* Application list */
+
+.applications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.application-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 24px;
+    background: #fffdf8;
+    border: 1px solid #e8e1d3;
+    border-radius: 12px;
+    transition: 0.2s ease;
+}
+
+.application-card:hover {
+    transform: translateY(-2px);
+    border-color: #c9bda8;
+    box-shadow: 0 8px 25px rgba(57, 48, 35, 0.07);
+}
+
+.application-main {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.company-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    background: #e8eee7;
+    color: #2f5d3a;
+
+    border-radius: 10px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.job-info h2 {
+    margin: 0 0 5px;
+    color: #27392c;
+    font-size: 19px;
+}
+
+.company-name {
+    margin: 0 0 10px;
+    color: #8c4a32;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: #77766f;
+    font-size: 13px;
+}
+
+.view-job-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 15px;
+    border: 1px solid #2f5d3a;
+    border-radius: 6px;
+    color: #2f5d3a;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.view-job-button:hover {
+    background: #2f5d3a;
+    color: white;
+}
+
+.withdraw-button {
+    margin-top: 12px;
+    padding: 8px 15px;
+    border: 1px solid #a6533b;
+    border-radius: 6px;
+    background: transparent;
+    color: #a6533b;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.withdraw-button:hover {
+    background: #a6533b;
+    color: white;
+}
+
+/* Right section */
+
+.application-side {
+    min-width: 180px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #eee9dd;
+    color: #656158;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status.applied {
+    background: #e6efe6;
+    color: #2f5d3a;
+}
+
+.status.selected {
+    background: #e7eee7;
+    color: #245c35;
+}
+
+.status.rejected {
+    background: #f3e3dc;
+    color: #914b34;
+}
+
+.applied-date {
+    margin: 10px 0 0;
+    color: #85827a;
+    font-size: 12px;
+}
+
+/* Loading / Empty / Error */
+
+.state-card {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #fffdf8;
+    border: 1px solid #e8e1d3;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.state-card h3 {
+    margin: 10px 0 6px;
+    color: #304333;
+}
+
+.state-card p {
+    color: #77766f;
+    font-size: 14px;
+}
+
+.empty-icon {
+    font-size: 38px;
+}
+
+.error-card h3 {
+    color: #8c4a32;
+}
+
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #ddd8ca;
+    border-top-color: #2f5d3a;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+
+    .applications-page {
+        padding: 30px 5%;
+    }
+
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+    }
+
+    .application-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .application-side {
+        width: 100%;
+        text-align: left;
+    }
+
+    .job-meta {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
