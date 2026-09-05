@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-export interface Student {
+export interface StudentData {
   studentId: number;
   user: any;
   phone: string | null;
@@ -24,7 +24,7 @@ export class Student {
 
   constructor(private http: HttpClient) { }
 
-  getStudentByUserId(userId: number): Observable<Student> {
-    return this.http.get<Student>(`${this.apiUrl}/user/${userId}`);
+  getStudentByUserId(userId: number): Observable<StudentData> {
+    return this.http.get<StudentData>(`${this.apiUrl}/user/${userId}`);
   }
 }

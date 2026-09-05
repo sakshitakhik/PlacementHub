@@ -33,6 +33,12 @@ public class JobController {
     public List<Job> getAllJobs() {
         return jobService.getAllJobs();
     }
+    
+    @GetMapping("/jobs/recruiter/{recruiterId}")
+    public List<Job> getJobsByRecruiterId(
+            @PathVariable("recruiterId") Long recruiterId) {
+        return jobService.getJobsByRecruiterId(recruiterId);
+    }
 
     // Get job by ID
     @GetMapping("/jobs/{id}")
@@ -57,4 +63,5 @@ public class JobController {
 
         return "Job deleted successfully";
     }
+   
 }

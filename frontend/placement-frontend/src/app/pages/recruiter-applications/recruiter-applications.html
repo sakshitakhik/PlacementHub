@@ -1,0 +1,157 @@
+<div class="recruiter-applications-page">
+
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">RECRUITMENT</span>
+            <h1>Applications</h1>
+            <p>Review candidates who have applied for your jobs.</p>
+        </div>
+    </div>
+
+    @if (isLoading) {
+        <div class="state-card">
+            <div class="loader"></div>
+            <p>Loading applications...</p>
+        </div>
+    }
+
+    @if (!isLoading && errorMessage) {
+        <div class="state-card error-card">
+            <h3>Something went wrong</h3>
+            <p>{{ errorMessage }}</p>
+        </div>
+    }
+
+    @if (!isLoading && !errorMessage && applications.length === 0) {
+        <div class="state-card empty-card">
+            <div class="empty-icon">📄</div>
+            <h3>No applications yet</h3>
+            <p>No students have applied to your jobs yet.</p>
+        </div>
+    }
+
+    @if (!isLoading && !errorMessage && applications.length > 0) {
+
+        <div class="applications-list">
+
+            @for (application of applications; track application.applicationId) {
+
+                <div class="application-card">
+
+                    <div class="application-main">
+
+                        <div class="student-icon">
+                            {{ application.student?.user?.name?.charAt(0) || 'S' }}
+                        </div>
+
+                        <div class="candidate-info">
+
+                            <h2>
+                                {{ application.student?.user?.name || 'Student' }}
+                            </h2>
+
+                            <p class="student-email">
+                                {{ application.student?.user?.email || 'Email not available' }}
+                            </p>
+
+                            <p class="job-title">
+                                Applied for:
+                                <strong>
+                                    {{ application.job?.title || 'Job Position' }}
+                                </strong>
+                            </p>
+
+                            <div class="candidate-meta">
+
+                                <span>
+                                    🎓 CGPA:
+                                    {{ application.student?.cgpa || 'N/A' }}
+                                </span>
+
+                                <span>
+                                    💼
+                                    {{ application.student?.branch || 'Branch not specified' }}
+                                </span>
+
+                                <span>
+                                    🎓
+                                    {{ application.student?.graduationYear || 'N/A' }}
+                                </span>
+
+                                <span>
+                                    📅 Applied:
+                                    {{ application.appliedAt | date:'dd MMM yyyy' }}
+                                </span>
+
+                            </div>
+
+                            @if (application.coverLetter) {
+                                <div class="cover-letter">
+                                    <span>Cover Letter</span>
+                                    <p>{{ application.coverLetter }}</p>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div class="application-side">
+
+                        <span class="status"
+                            [class.applied]="application.status === 'APPLIED'"
+                            [class.shortlisted]="application.status === 'SHORTLISTED'"
+                            [class.interview]="application.status === 'INTERVIEW'"
+                            [class.selected]="application.status === 'SELECTED'"
+                            [class.rejected]="application.status === 'REJECTED'">
+
+                            @if (application.status === 'APPLIED') {
+                                Applied
+                            } @else if (application.status === 'SHORTLISTED') {
+                                Shortlisted
+                            } @else if (application.status === 'INTERVIEW') {
+                                Interview
+                            } @else if (application.status === 'SELECTED') {
+                                Selected
+                            } @else if (application.status === 'REJECTED') {
+                                Rejected
+                            } @else {
+                                {{ application.status }}
+                            }
+
+                        </span>
+
+                        <a
+                            [href]="application.student?.resumeUrl"
+                            target="_blank"
+                            class="resume-button">
+                            View Resume
+                        </a>
+
+                        <select class="status-select"
+        [(ngModel)]="selectedStatuses[application.applicationId]">
+    <option value="APPLIED">Applied</option>
+    <option value="SHORTLISTED">Shortlisted</option>
+    <option value="INTERVIEW">Interview</option>
+    <option value="SELECTED">Selected</option>
+    <option value="REJECTED">Rejected</option>
+</select>
+
+<button 
+    type="button" 
+    class="update-button"
+    (click)="updateStatus(application)"> 
+    Update Status 
+</button>
+
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+
+    }
+
+</div>

@@ -1,0 +1,218 @@
+<div class="recruiter-jobs-page">
+
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">JOB MANAGEMENT</span>
+            <h1>My Jobs</h1>
+            <p>Manage the jobs posted by your company.</p>
+        </div>
+
+        <button type="button" class="post-job-button" (click)="openJobForm()">
+            + Post New Job
+        </button>
+    </div>
+    @if (showJobForm) {
+    <p style="color: red; font-size: 30px;">FORM IS OPEN</p>
+
+    <div class="job-form-card">
+
+        <div class="form-header">
+            <div>
+                <span class="eyebrow">NEW JOB</span>
+                <h2>Post a New Job</h2>
+                <p>Create a new opening for students.</p>
+            </div>
+
+            <button type="button" class="close-form-button" (click)="showJobForm = false">
+                ✕
+            </button>
+        </div>
+
+        <div class="job-form">
+
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" [(ngModel)]="newJob.title" placeholder="e.g. Java Developer">
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea [(ngModel)]="newJob.description" rows="4" placeholder="Enter job description"></textarea>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" [(ngModel)]="newJob.location" placeholder="e.g. Pune">
+                </div>
+
+                <div class="form-group">
+                    <label>Employment Type</label>
+                    <select [(ngModel)]="newJob.employmentType">
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Internship">Internship</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>Minimum Salary (₹)</label>
+                    <input type="number" [(ngModel)]="newJob.salaryMin" placeholder="450000">
+                </div>
+
+                <div class="form-group">
+                    <label>Maximum Salary (₹)</label>
+                    <input type="number" [(ngModel)]="newJob.salaryMax" placeholder="700000">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>Minimum CGPA</label>
+                    <input type="number" step="0.01" [(ngModel)]="newJob.minCgpa" placeholder="7.00">
+                </div>
+
+                <div class="form-group">
+                    <label>Graduation Year</label>
+                    <input type="number" [(ngModel)]="newJob.graduationYear" placeholder="2026">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>Application Deadline</label>
+                <input type="date" [(ngModel)]="newJob.applicationDeadline">
+            </div>
+
+            <div class="form-actions">
+
+                <button type="button" class="cancel-button" (click)="showJobForm = false; newJob = {
+          title: '',
+          description: '',
+          location: '',
+          employmentType: 'Full-time',
+          salaryMin: null,
+          salaryMax: null,
+          minCgpa: null,
+          graduationYear: null,
+          applicationDeadline: ''
+        }">
+                    Cancel
+                </button>
+
+                <button type="button" class="save-job-button" (click)="postJob()">
+                    @if (editingJobId === null) {
+                    Post Job
+                    } @else {
+                    Update Job
+                    }
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    }
+    @if (isLoading) {
+    <div class="state-card">
+        <div class="loader"></div>
+        <p>Loading your jobs...</p>
+    </div>
+    }
+
+    @if (!isLoading && errorMessage) {
+    <div class="state-card error-card">
+        <h3>Something went wrong</h3>
+        <p>{{ errorMessage }}</p>
+    </div>
+    }
+
+    @if (!isLoading && !errorMessage && jobs.length === 0&& !showJobForm) {
+    <div class="state-card empty-card">
+        <div class="empty-icon">💼</div>
+        <h3>No jobs posted yet</h3>
+        <p>You haven't posted any jobs yet.</p>
+
+        <button type="button" class="post-job-button" (click)="openJobForm()">
+            Post Your First Job
+        </button>
+    </div>
+    }
+
+    @if (!isLoading && !errorMessage && jobs.length > 0) {
+
+    <div class="jobs-list">
+
+        @for (job of jobs; track job.jobId) {
+
+        <div class="job-card">
+
+            <div class="job-main">
+
+                <div class="company-icon">
+                    {{ job.company?.name?.charAt(0) || 'C' }}
+                </div>
+
+                <div class="job-info">
+
+                    <h2>{{ job.title }}</h2>
+
+                    <p class="company-name">
+                        {{ job.company?.name || 'Company' }}
+                    </p>
+
+                    <div class="job-meta">
+                        <span>📍 {{ job.location }}</span>
+                        <span>💼 {{ job.employmentType }}</span>
+                        <span>
+                            💰 ₹{{ job.salaryMin / 100000 | number:'1.1-1' }}L -
+                            ₹{{ job.salaryMax / 100000 | number:'1.1-1' }}L
+                        </span>
+                        <span>🎓 Min CGPA: {{ job.minCgpa || 'N/A' }}</span>
+                        <span>🎓 Graduation: {{ job.graduationYear || 'N/A' }}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="job-side">
+
+                <span class="job-status">
+                    {{ job.status }}
+                </span>
+
+                <p class="deadline">
+                    Deadline:
+                    {{ job.applicationDeadline | date:'dd MMM yyyy' }}
+                </p>
+
+                <div class="job-actions">
+                    <button class="edit-button" (click)="editJob(job)">
+                        Edit
+                    </button>
+
+                    <button class="delete-button" (click)="deleteJob(job.jobId)">
+                        Delete
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+    }
+
+</div>

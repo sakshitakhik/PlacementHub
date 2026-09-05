@@ -28,6 +28,10 @@ public class RecruiterService {
 	    public Recruiter getRecruiterById(Long id) {
 	        return recruiterRepository.findById(id).orElse(null);
 	    }
+	    
+	    public Recruiter getRecruiterByUserId(Long userId) {
+	        return recruiterRepository.findByUser_Id(userId);
+	    }
 
 	    // Update recruiter
 	    public Recruiter updateRecruiter(Long id, Recruiter recruiter) {

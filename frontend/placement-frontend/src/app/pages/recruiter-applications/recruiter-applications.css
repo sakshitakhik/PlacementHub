@@ -1,0 +1,290 @@
+.recruiter-applications-page {
+    min-height: 100vh;
+    padding: 45px 7%;
+    background: #f8f5ed;
+}
+
+.page-header {
+    margin-bottom: 35px;
+}
+
+.eyebrow {
+    color: #8c4a32;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.page-header h1 {
+    margin: 8px 0 6px;
+    color: #24452f;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin: 0;
+    color: #6f756f;
+    font-size: 15px;
+}
+
+.applications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.application-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 24px;
+    background: #fffdf8;
+    border: 1px solid #e8e1d3;
+    border-radius: 12px;
+    transition: 0.2s ease;
+}
+
+.application-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(54, 67, 56, 0.08);
+}
+
+.application-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    flex: 1;
+}
+
+.student-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #e8eee7;
+    color: #2f5d3a;
+    border-radius: 10px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.candidate-info h2 {
+    margin: 0 0 4px;
+    color: #27392c;
+    font-size: 19px;
+}
+
+.student-email {
+    margin: 0 0 10px;
+    color: #77766f;
+    font-size: 13px;
+}
+
+.job-title {
+    margin: 0 0 12px;
+    color: #8c4a32;
+    font-size: 14px;
+}
+
+.job-title strong {
+    color: #2f5d3a;
+}
+
+.candidate-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: #77766f;
+    font-size: 13px;
+}
+
+.cover-letter {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: #f5f1e8;
+    border-left: 3px solid #8c4a32;
+    border-radius: 6px;
+}
+
+.cover-letter span {
+    display: block;
+    margin-bottom: 5px;
+    color: #2f5d3a;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.cover-letter p {
+    margin: 0;
+    color: #656860;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.application-side {
+    min-width: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status.applied {
+    background: #e6efe6;
+    color: #2f5d3a;
+}
+
+.status.shortlisted {
+    background: #eee9d8;
+    color: #766129;
+}
+
+.status.interview {
+    background: #e8e4ef;
+    color: #5d4d7d;
+}
+
+.status.selected {
+    background: #dfece2;
+    color: #245c35;
+}
+
+.status.rejected {
+    background: #f3e3dc;
+    color: #914b34;
+}
+
+.status-select {
+    padding: 9px 12px;
+    border: 1px solid #d8d2c5;
+    border-radius: 8px;
+    background: #fffdf8;
+    color: #2f5d3a;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.status-select:focus {
+    border-color: #2f5d3a;
+}
+
+.resume-button,
+.update-button {
+    width: 140px;
+    padding: 9px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.resume-button {
+    margin-top: 16px;
+    border: 1px solid #2f5d3a;
+    color: #2f5d3a;
+    background: transparent;
+    text-decoration: none;
+}
+
+.update-button {
+    margin-top: 9px;
+    border: 1px solid #2f5d3a;
+    background: #2f5d3a;
+    color: white;
+}
+
+.resume-button:hover {
+    background: #2f5d3a;
+    color: white;
+}
+
+.update-button:hover {
+    background: #24452f;
+}
+
+.state-card {
+    padding: 50px 25px;
+    text-align: center;
+    background: #fffdf8;
+    border: 1px solid #e8e1d3;
+    border-radius: 12px;
+    color: #6f756f;
+}
+
+.state-card h3 {
+    margin: 0 0 8px;
+    color: #27392c;
+}
+
+.state-card p {
+    margin: 0;
+}
+
+.empty-icon {
+    margin-bottom: 12px;
+    font-size: 32px;
+}
+
+.error-card {
+    border-color: #e3c8bd;
+}
+
+.loader {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 15px;
+    border: 3px solid #e4e0d5;
+    border-top-color: #2f5d3a;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 700px) {
+
+    .recruiter-applications-page {
+        padding: 30px 5%;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+    }
+
+    .application-card {
+        flex-direction: column;
+    }
+
+    .application-side {
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .candidate-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .resume-button,
+    .update-button {
+        width: 100%;
+    }
+}

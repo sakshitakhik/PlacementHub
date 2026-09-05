@@ -7,6 +7,9 @@ import { StudentDashboard } from './pages/student-dashboard/student-dashboard';
 import { Jobs } from './pages/jobs/jobs';
 import { JobDetails } from './pages/job-details/job-details';
 import { ApplyJob } from './pages/apply-job/apply-job';
+import { MyApplications } from './pages/my-applications/my-applications';
+import { RecruiterApplications } from './pages/recruiter-applications/recruiter-applications';
+import { RecruiterJobs } from './pages/recruiter-jobs/recruiter-jobs';
 
 export const routes: Routes = [
   {
@@ -36,5 +39,17 @@ export const routes: Routes = [
   {
     path: 'jobs/:id/apply',
     component: ApplyJob
+  },
+  {
+    path: 'my-applications',
+    component: MyApplications
+  },
+  {
+    path: 'recruiter-applications',
+    component: RecruiterApplications
+  },
+  {
+    path: 'recruiter-jobs',
+    component: RecruiterJobs
   }
 ];

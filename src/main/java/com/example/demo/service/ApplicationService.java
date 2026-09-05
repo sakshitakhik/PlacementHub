@@ -3,7 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import com.example.demo.Application;
 import com.example.demo.DuplicateApplicationException;
 import com.example.demo.repository.ApplicationRepository;
@@ -34,7 +34,8 @@ public class ApplicationService {
                     "You have already applied for this job."
             );
         }
-
+        application.setAppliedAt(LocalDateTime.now());
+        application.setUpdatedAt(LocalDateTime.now());
         return applicationRepository.save(application);
     }
 
@@ -46,7 +47,10 @@ public class ApplicationService {
     public List<Application> getApplicationsByStudentId(Long studentId) {
         return applicationRepository.findByStudent_StudentId(studentId);
     }
-
+    public List<Application> getApplicationsByRecruiterId(Long recruiterId) {
+        return applicationRepository.findByJob_Recruiter_RecruiterId(recruiterId);
+    }
+    
     // Get application by ID
     public Application getApplicationById(Long id) {
         return applicationRepository.findById(id).orElse(null);

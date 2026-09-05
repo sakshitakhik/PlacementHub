@@ -28,7 +28,9 @@ public class JobService {
     public Job getJobById(Long id) {
         return jobRepository.findById(id).orElse(null);
     }
-
+    public List<Job> getJobsByRecruiterId(Long recruiterId) {
+        return jobRepository.findByRecruiter_RecruiterId(recruiterId);
+    }
     // Update job
     public Job updateJob(Long id, Job job) {
 

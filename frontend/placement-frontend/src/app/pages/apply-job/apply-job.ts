@@ -7,7 +7,7 @@ import { Auth, User } from '../../services/auth';
 import { Application } from '../../services/application';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Student } from '../../services/student';
+import { Student, StudentData } from '../../services/student';
 @Component({
   selector: 'app-apply-job',
   imports: [CommonModule, RouterLink, FormsModule],
@@ -18,7 +18,7 @@ export class ApplyJob implements OnInit {
 
   job: Job | null = null;
   user: User | null = null;
-  student: Student | null = null;
+  student: StudentData | null = null;
   coverLetter = '';
   isLoading = true;
   isSubmitting = false;
@@ -42,7 +42,7 @@ export class ApplyJob implements OnInit {
       return;
     }
     this.studentService.getStudentByUserId(this.user.id).subscribe({
-      next: (data: Student) => {
+      next: (data: StudentData) => {
         this.student = data;
         console.log('LOGGED IN STUDENT:', data);
 

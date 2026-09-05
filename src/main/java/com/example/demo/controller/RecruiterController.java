@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.demo.Recruiter;
 import com.example.demo.service.RecruiterService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class RecruiterController {
 	 private final RecruiterService recruiterService;
 
@@ -30,6 +32,14 @@ public class RecruiterController {
 	    @GetMapping("/recruiters")
 	    public List<Recruiter> getAllRecruiters() {
 	        return recruiterService.getAllRecruiters();
+	    }
+	    
+	    
+	    @CrossOrigin(origins = "http://localhost:4200")
+	    @GetMapping("/recruiters/user/{userId}")
+	    public Recruiter getRecruiterByUserId(
+	            @PathVariable("userId") Long userId) {
+	        return recruiterService.getRecruiterByUserId(userId);
 	    }
 
 	    // Get recruiter by ID
