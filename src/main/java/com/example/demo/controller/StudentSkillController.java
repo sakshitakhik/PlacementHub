@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import com.example.demo.StudentSkill;
 import com.example.demo.service.StudentSkillService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class StudentSkillController {
 	private final StudentSkillService studentSkillService;
 
@@ -34,6 +36,15 @@ public class StudentSkillController {
     public List<StudentSkill> getAllStudentSkills() {
 
         return studentSkillService.getAllStudentSkills();
+    }
+    
+    
+    
+    @GetMapping("/student-skills/student/{studentId}")
+    public List<StudentSkill> getStudentSkillsByStudentId(
+            @PathVariable("studentId") Long studentId) {
+
+        return studentSkillService.getStudentSkillsByStudentId(studentId);
     }
 
     // Get a specific student-skill relationship

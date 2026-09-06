@@ -24,7 +24,10 @@ public class StudentSkillService {
 	    public List<StudentSkill> getAllStudentSkills() {
 	        return studentSkillRepository.findAll();
 	    }
-
+	 // Get all skills of a specific student
+	    public List<StudentSkill> getStudentSkillsByStudentId(Long studentId) {
+	        return studentSkillRepository.findByStudent_StudentId(studentId);
+	    }
 	    // Get student skill by composite ID
 	    public StudentSkill getStudentSkillById(
 	            Long studentId, Long skillId) {

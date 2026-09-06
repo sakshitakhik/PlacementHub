@@ -42,14 +42,14 @@ public class StudentController {
 
 	    // Update student
 	    @PutMapping("/students/{id}")
-	    public Student updateStudent(@PathVariable Long id,
+	    public Student updateStudent(@PathVariable("id") Long id,
 	                                 @RequestBody Student student) {
 	        return studentService.updateStudent(id, student);
 	    }
 
 	    // Delete student
 	    @DeleteMapping("/students/{id}")
-	    public String deleteStudent(@PathVariable Long id) {
+	    public String deleteStudent(@PathVariable("id") Long id) {
 	        studentService.deleteStudent(id);
 	        return "Student deleted successfully";
 	    }
