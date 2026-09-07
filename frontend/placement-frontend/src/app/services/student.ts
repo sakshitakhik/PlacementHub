@@ -27,4 +27,7 @@ export class Student {
   getStudentByUserId(userId: number): Observable<StudentData> {
     return this.http.get<StudentData>(`${this.apiUrl}/user/${userId}`);
   }
+  updateStudent(id: number, student: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, student);
+  }
 }

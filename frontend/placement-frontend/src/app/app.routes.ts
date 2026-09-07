@@ -10,6 +10,7 @@ import { ApplyJob } from './pages/apply-job/apply-job';
 import { MyApplications } from './pages/my-applications/my-applications';
 import { RecruiterApplications } from './pages/recruiter-applications/recruiter-applications';
 import { RecruiterJobs } from './pages/recruiter-jobs/recruiter-jobs';
+import { StudentProfile } from './pages/student-profile/student-profile';
 
 export const routes: Routes = [
   {
@@ -51,5 +52,9 @@ export const routes: Routes = [
   {
     path: 'recruiter-jobs',
     component: RecruiterJobs
+  },
+  {
+    path: 'student-profile',
+    component: StudentProfile
   }
 ];

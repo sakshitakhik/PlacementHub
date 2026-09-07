@@ -1,0 +1,310 @@
+<div class="profile-page">
+
+    @if (toastMessage) {
+    <div class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+
+        {{ toastMessage }}
+
+    </div>
+    }
+
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div>
+            <h1>My Profile</h1>
+            <p>Manage your personal and academic information.</p>
+        </div>
+    </div>
+
+
+    <!-- Loading State -->
+    @if (isLoading) {
+    <div class="state-card">
+        <p>Loading your profile...</p>
+    </div>
+    }
+
+
+    <!-- Profile Content -->
+    @if (!isLoading && student) {
+
+    <form class="profile-form" (ngSubmit)="updateProfile()">
+
+
+        <!-- Personal Information -->
+        <section class="profile-card">
+
+            <div class="section-heading">
+                <h2>Personal Information</h2>
+                <p>Your basic contact and personal details.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" [value]="student.user?.name" readonly>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" [value]="student.user?.email" readonly>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" [(ngModel)]="student.phone" name="phone">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" [(ngModel)]="student.dateOfBirth" name="dateOfBirth">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Gender</label>
+
+                    <select [(ngModel)]="student.gender" name="gender">
+
+                        <option value="">Select Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other</option>
+
+                    </select>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Academic Information -->
+        <section class="profile-card">
+
+            <div class="section-heading">
+                <h2>Academic Information</h2>
+                <p>Keep your education details up to date.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>College</label>
+
+                    <input type="text" [(ngModel)]="student.college" name="college">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Branch</label>
+
+                    <input type="text" [(ngModel)]="student.branch" name="branch">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Graduation Year</label>
+
+                    <input type="number" [(ngModel)]="student.graduationYear" name="graduationYear">
+                </div>
+
+
+                <div class="form-group">
+                    <label>CGPA</label>
+
+                    <input type="number" step="0.01" [(ngModel)]="student.cgpa" name="cgpa">
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Professional Information -->
+        <section class="profile-card">
+
+            <div class="section-heading">
+                <h2>Professional Information</h2>
+                <p>
+                    Add information that helps recruiters understand your profile.
+                </p>
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Resume URL</label>
+
+                <input type="url" [(ngModel)]="student.resumeUrl" name="resumeUrl"
+                    placeholder="https://example.com/resume.pdf">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Profile Summary</label>
+
+                <textarea rows="5" [(ngModel)]="student.profileSummary" name="profileSummary"
+                    placeholder="Write a short summary about yourself..."></textarea>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Skills -->
+        <section class="profile-card">
+
+            <div class="section-heading">
+
+                <h2>Skills</h2>
+
+                <p>
+                    Skills you have added to your profile.
+                </p>
+
+            </div>
+
+
+            <!-- Add Skill Button -->
+            <button type="button" class="add-skill-btn" (click)="showAddSkill = !showAddSkill; loadAvailableSkills()">
+
+                {{ showAddSkill ? 'Cancel' : '+ Add Skill' }}
+
+            </button>
+
+
+
+            <!-- Add Skill Area -->
+            @if (showAddSkill) {
+
+            <div class="add-skill-box">
+
+                @if (availableSkills.length > 0) {
+
+                <select [(ngModel)]="selectedSkillId" name="selectedSkill">
+
+                    <option [ngValue]="null">
+                        Select a skill
+                    </option>
+
+
+                    @for (skill of availableSkills; track skill.skillId) {
+
+                    <option [ngValue]="skill.skillId">
+                        {{ skill.name }}
+                    </option>
+
+                    }
+
+                </select>
+
+
+                <button type="button" class="save-skill-btn" (click)="addSkill()">
+
+                    Add
+
+                </button>
+
+                } @else {
+
+                <p class="no-skills-message">
+                    You have already added all available skills.
+                </p>
+
+                }
+
+            </div>
+
+            }
+
+
+
+            <!-- Loading Skills -->
+            @if (isSkillsLoading) {
+
+            <p>Loading skills...</p>
+
+            }
+
+
+
+            <!-- No Skills -->
+            @if (!isSkillsLoading && skills.length === 0) {
+
+            <p>No skills added yet.</p>
+
+            }
+
+
+
+            <!-- Skill List -->
+            @if (!isSkillsLoading && skills.length > 0) {
+
+            <div class="skills-list">
+
+                @for (
+                studentSkill of skills;
+                track studentSkill.id.skillId
+                ) {
+
+                <div class="skill-item">
+
+                    <span class="skill-badge">
+                        {{ studentSkill.skill.name }}
+                    </span>
+
+
+                    <button type="button" class="remove-skill-btn" (click)="removeSkill(studentSkill.id.skillId)">
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+                }
+
+            </div>
+
+            }
+
+        </section>
+
+
+
+        <!-- Save Changes -->
+        <div class="form-actions">
+
+            <button type="submit" class="save-button" [disabled]="isSaving">
+
+                @if (isSaving) {
+
+                Saving...
+
+                } @else {
+
+                Save Changes
+
+                }
+
+            </button>
+
+        </div>
+
+
+    </form>
+
+    }
+
+</div>
