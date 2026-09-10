@@ -8,10 +8,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.demo.Company;
 import com.example.demo.service.CompanyService;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(
+	    origins = "http://localhost:4200",
+	    methods = {
+	        RequestMethod.GET,
+	        RequestMethod.POST,
+	        RequestMethod.PUT,
+	        RequestMethod.DELETE,
+	        RequestMethod.OPTIONS
+	    }
+	)
 @RestController
 public class CompanyController {
 	 private final CompanyService companyService;

@@ -1,52 +1,52 @@
-<div class="dashboard">
+<div class="dashboard-page">
 
-  <!-- SIDEBAR -->
+  <!-- Sidebar -->
   <aside class="sidebar">
 
     <div class="brand">
-      <span class="brand-icon">P</span>
-      <span>Placement<span>Hub</span></span>
+      <div class="brand-icon">P</div>
+      <span>PlacementHub</span>
     </div>
 
-    <nav class="nav-menu">
+    <nav class="sidebar-nav">
 
-      <a class="nav-item active">
-        <span>⌂</span>
-        Dashboard
+      <a routerLink="/student-dashboard" class="nav-item active">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
       </a>
 
-      <a class="nav-item" routerLink="/jobs">
-        <span>⌕</span>
-        Find Jobs
+      <a routerLink="/jobs" class="nav-item">
+        <span class="nav-icon">⌕</span>
+        <span>Find Jobs</span>
       </a>
 
-      <a class="nav-item" routerLink="/my-applications">
-        <span>▣</span>
-        My Applications
+      <a routerLink="/my-applications" class="nav-item">
+        <span class="nav-icon">▣</span>
+        <span>My Applications</span>
       </a>
 
-      <a class="nav-item">
-        <span>♙</span>
-        My Profile
+      <a routerLink="/student-profile" class="nav-item">
+        <span class="nav-icon">♙</span>
+        <span>My Profile</span>
       </a>
 
-      <a class="nav-item">
-        <span>♧</span>
-        Notifications
+      <a href="#" class="nav-item">
+        <span class="nav-icon">♧</span>
+        <span>Notifications</span>
       </a>
 
     </nav>
 
     <div class="sidebar-bottom">
 
-      <a class="nav-item">
-        <span>⚙</span>
-        Settings
+      <a href="#" class="nav-item">
+        <span class="nav-icon">⚙</span>
+        <span>Settings</span>
       </a>
 
-      <button class="logout-btn" (click)="logout()">
-        <span>↪</span>
-        Logout
+      <button type="button" class="logout-button" (click)="logout()">
+        <span class="nav-icon">↪</span>
+        <span>Logout</span>
       </button>
 
     </div>
@@ -54,35 +54,30 @@
   </aside>
 
 
-  <!-- MAIN CONTENT -->
+  <!-- Main Content -->
   <main class="main-content">
 
-    <!-- TOP BAR -->
-    <header class="topbar">
+    <!-- Header -->
+    <header class="dashboard-header">
 
       <div>
-        <span class="page-label">STUDENT PORTAL</span>
+        <span class="eyebrow">STUDENT PORTAL</span>
         <h1>Dashboard</h1>
       </div>
 
-      <div class="topbar-right">
+      <div class="user-info">
 
-        <button class="notification-btn">
+        <div class="notification-icon">
           ♧
-          <span class="notification-dot"></span>
-        </button>
+        </div>
 
-        <div class="user-info">
+        <div class="user-avatar">
+          {{ user?.name?.charAt(0)?.toUpperCase() || 'S' }}
+        </div>
 
-          <div class="avatar">
-            {{ user?.name?.charAt(0)?.toUpperCase() }}
-          </div>
-
-          <div>
-            <strong>{{ user?.name }}</strong>
-            <small>Student</small>
-          </div>
-
+        <div class="user-details">
+          <strong>{{ user?.name || 'Student' }}</strong>
+          <span>Student</span>
         </div>
 
       </div>
@@ -90,90 +85,118 @@
     </header>
 
 
-    <!-- WELCOME -->
-    <section class="welcome-section">
+    <!-- Welcome Banner -->
+    <section class="welcome-card">
 
-      <div>
+      <div class="welcome-content">
 
-        <span class="welcome-label">
-          WELCOME BACK
-        </span>
+        <span class="welcome-label">WELCOME BACK</span>
 
         <h2>
-          Hello, {{ user?.name }} <span>👋</span>
+          Hello, {{ user?.name || 'Student' }} 👋
         </h2>
 
         <p>
-          Here’s what’s happening with your placement journey.
+          Here's what's happening with your placement journey.
         </p>
 
       </div>
 
-      <div class="welcome-shape">
-        <span>✦</span>
+      <div class="welcome-decoration">
+        <div class="circle circle-one"></div>
+        <div class="circle circle-two"></div>
+        <div class="circle circle-three">
+          <span>✦</span>
+        </div>
       </div>
 
     </section>
 
 
-    <!-- STATISTICS -->
+    <!-- Statistics -->
     <section class="stats-grid">
 
+      <!-- Applications -->
       <div class="stat-card">
 
-        <div class="stat-icon applications">
+        <div class="stat-icon">
           ▣
         </div>
 
-        <div>
-          <span>APPLICATIONS</span>
-          <h3>0</h3>
-          <p>Total applications</p>
+        <div class="stat-content">
+          <span class="stat-label">APPLICATIONS</span>
+
+          <strong>
+            {{ totalApplications }}
+          </strong>
+
+          <small>
+            Total applications
+          </small>
         </div>
 
       </div>
 
 
+      <!-- Interviews -->
       <div class="stat-card">
 
-        <div class="stat-icon interviews">
+        <div class="stat-icon">
           ◷
         </div>
 
-        <div>
-          <span>INTERVIEWS</span>
-          <h3>0</h3>
-          <p>Upcoming interviews</p>
+        <div class="stat-content">
+          <span class="stat-label">INTERVIEWS</span>
+
+          <strong>
+            {{ interviewApplications }}
+          </strong>
+
+          <small>
+            Upcoming interviews
+          </small>
         </div>
 
       </div>
 
 
+      <!-- Shortlisted -->
       <div class="stat-card">
 
-        <div class="stat-icon shortlisted">
+        <div class="stat-icon">
           ★
         </div>
 
-        <div>
-          <span>SHORTLISTED</span>
-          <h3>0</h3>
-          <p>Shortlisted applications</p>
+        <div class="stat-content">
+          <span class="stat-label">SHORTLISTED</span>
+
+          <strong>
+            {{ shortlistedApplications }}
+          </strong>
+
+          <small>
+            Shortlisted applications
+          </small>
         </div>
 
       </div>
 
 
+      <!-- Profile -->
       <div class="stat-card">
 
-        <div class="stat-icon profile">
-          ◉
+        <div class="stat-icon">
+          ◎
         </div>
 
-        <div>
-          <span>PROFILE</span>
-          <h3>70%</h3>
-          <p>Profile completed</p>
+        <div class="stat-content">
+          <span class="stat-label">PROFILE</span>
+
+          <strong>70%</strong>
+
+          <small>
+            Profile completed
+          </small>
         </div>
 
       </div>
@@ -181,94 +204,104 @@
     </section>
 
 
-    <!-- JOBS -->
+    <!-- Recommended Jobs -->
     <section class="jobs-section">
 
-      <div class="section-heading">
+      <div class="section-header">
 
         <div>
-          <span class="section-label">
-            OPPORTUNITIES
-          </span>
+          <span class="section-label">OPPORTUNITIES</span>
 
           <h2>Recommended jobs</h2>
         </div>
 
-        <a class="view-all" routerLink="/jobs">
+        <a routerLink="/jobs" class="view-all">
           View all →
         </a>
 
       </div>
 
 
-      <div class="job-list">
+      <!-- Job 1 -->
+      <div class="job-card">
 
-        <!-- JOB 1 -->
-        <article class="job-card">
+        <div class="job-company-icon">
+          I
+        </div>
 
-          <div class="company-logo">
-            I
-          </div>
+        <div class="job-info">
 
-          <div class="job-details">
+          <span class="job-type">
+            FULL TIME
+          </span>
 
-            <span class="job-type">
-              FULL TIME
-            </span>
+          <h3>
+            Software Developer
+          </h3>
 
-            <h3>Software Developer</h3>
-
-            <p>
-              Infosys · Pune
-            </p>
-
-            <div class="job-meta">
-              <span>₹4.5 – 7 LPA</span>
-              <span>•</span>
-              <span>IT / Software</span>
-            </div>
-
-          </div>
-
-          <button class="apply-btn">
-            View Job →
-          </button>
-
-        </article>
-
-
-        <!-- JOB 2 -->
-        <article class="job-card">
-
-          <div class="company-logo tcs">
-            T
-          </div>
+          <p>
+            Infosys · Pune
+          </p>
 
           <div class="job-details">
-
-            <span class="job-type">
-              FULL TIME
-            </span>
-
-            <h3>Graduate Engineer</h3>
-
-            <p>
-              Tata Consultancy Services · Pune
-            </p>
-
-            <div class="job-meta">
-              <span>₹4 – 6 LPA</span>
-              <span>•</span>
-              <span>Engineering</span>
-            </div>
-
+            ₹4.5 – 7 LPA
+            <span>•</span>
+            IT / Software
           </div>
 
-          <button class="apply-btn">
-            View Job →
-          </button>
+        </div>
 
-        </article>
+        <a [routerLink]="['/jobs', 1]" class="view-job-button">
+
+          View Job →
+        </a>
+
+      </div>
+
+
+      <!-- Job 2 -->
+      <div class="job-card">
+
+        <div class="job-company-icon tata-icon">
+          T
+        </div>
+
+        <div class="job-info">
+
+          <span class="job-type">
+            FULL TIME
+          </span>
+
+          <h3>
+            Graduate Engineer
+          </h3>
+
+          <p>
+            Tata Consultancy Services · Pune
+          </p>
+
+          <div class="job-details">
+            ₹4 – 6 LPA
+            <span>•</span>
+            Engineering
+          </div>
+
+        </div>
+
+        <a [routerLink]="['/jobs', 2]" class="view-job-button">
+
+          View Job →
+        </a>
+
+      </div>
+
+
+      <!-- Browse Jobs -->
+      <div class="browse-jobs">
+
+        <a routerLink="/jobs" class="browse-link">
+          Explore all available jobs →
+        </a>
 
       </div>
 
