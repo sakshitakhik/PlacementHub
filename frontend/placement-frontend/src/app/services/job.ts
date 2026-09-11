@@ -29,7 +29,7 @@ export interface Recruiter {
   updatedAt: string | null;
 }
 
-export interface Job {
+export interface JobData {
   jobId: number;
   title: string;
   description: string;
@@ -53,26 +53,28 @@ export interface Job {
 export class Job {
   private apiUrl = 'http://localhost:8080/jobs';
   constructor(private http: HttpClient) { }
-  getAllJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(this.apiUrl);
+  getAllJobs(): Observable<JobData[]> {
+    return this.http.get<JobData[]>(this.apiUrl);
 
   }
-  getJobById(id: number): Observable<Job> {
-    return this.http.get<Job>(`${this.apiUrl}/${id}`);
+  getJobById(id: number): Observable<JobData> {
+    return this.http.get<JobData>(`${this.apiUrl}/${id}`);
 
   }
-  getJobsByRecruiterId(recruiterId: number): Observable<Job[]> {
-    return this.http.get<Job[]>(
+  getJobsByRecruiterId(recruiterId: number): Observable<JobData[]> {
+    return this.http.get<JobData[]>(
       `${this.apiUrl}/recruiter/${recruiterId}`
     );
   }
-  createJob(job: any): Observable<Job> {
-    return this.http.post<Job>(this.apiUrl, job);
+  createJob(job: any): Observable<JobData> {
+    return this.http.post<JobData>(this.apiUrl, job);
   }
-  updateJob(id: number, job: any): Observable<Job> {
-    return this.http.put<Job>(`${this.apiUrl}/${id}`, job);
+  updateJob(id: number, job: any): Observable<JobData> {
+    return this.http.put<JobData>(`${this.apiUrl}/${id}`, job);
   }
-  deleteJob(id: number): Observable<void> {
-  return this.http.delete<void>(`${this.apiUrl}/${id}`);
-}
+  deleteJob(id: number): Observable<string> {
+    return this.http.delete(`${this.apiUrl}/${id}`, {
+      responseType: 'text'
+    });
+  }
 }

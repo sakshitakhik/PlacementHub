@@ -12,7 +12,6 @@
         </button>
     </div>
     @if (showJobForm) {
-    <p style="color: red; font-size: 30px;">FORM IS OPEN</p>
 
     <div class="job-form-card">
 
@@ -147,8 +146,7 @@
     </div>
     }
 
-    @if (!isLoading && !errorMessage && jobs.length > 0) {
-
+    @if (!isLoading && jobs.length > 0) {
     <div class="jobs-list">
 
         @for (job of jobs; track job.jobId) {

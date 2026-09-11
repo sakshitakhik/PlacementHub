@@ -11,6 +11,8 @@ import { MyApplications } from './pages/my-applications/my-applications';
 import { RecruiterApplications } from './pages/recruiter-applications/recruiter-applications';
 import { RecruiterJobs } from './pages/recruiter-jobs/recruiter-jobs';
 import { StudentProfile } from './pages/student-profile/student-profile';
+import { RecruiterDashboard } from './pages/recruiter-dashboard/recruiter-dashboard';
+import { RecruiterProfile } from './pages/recruiter-profile/recruiter-profile';
 
 export const routes: Routes = [
   {
@@ -28,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'student-dashboard',
     component: StudentDashboard
+  },
+  {
+    path: 'recruiter-dashboard',
+    component: RecruiterDashboard
   },
   {
     path: 'jobs',
@@ -56,5 +62,10 @@ export const routes: Routes = [
   {
     path: 'student-profile',
     component: StudentProfile
+  },
+  {
+    path: 'recruiter-profile',
+    component: RecruiterProfile
   }
+
 ];

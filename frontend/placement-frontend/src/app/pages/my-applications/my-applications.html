@@ -12,6 +12,8 @@
         </a>
     </div>
 
+
+    <!-- Loading -->
     @if (isLoading) {
     <div class="state-card">
         <div class="loader"></div>
@@ -19,6 +21,8 @@
     </div>
     }
 
+
+    <!-- Error -->
     @if (!isLoading && errorMessage) {
     <div class="state-card error-card">
         <h3>Something went wrong</h3>
@@ -26,18 +30,26 @@
     </div>
     }
 
+
+    <!-- No Applications -->
     @if (!isLoading && !errorMessage && applications.length === 0) {
     <div class="state-card empty-card">
+
         <div class="empty-icon">📄</div>
+
         <h3>No applications yet</h3>
+
         <p>You haven't applied for any jobs yet.</p>
 
         <a routerLink="/jobs" class="browse-button">
             Find Jobs
         </a>
+
     </div>
     }
 
+
+    <!-- Applications List -->
     @if (!isLoading && !errorMessage && applications.length > 0) {
 
     <div class="applications-list">
@@ -46,6 +58,7 @@
 
         <div class="application-card">
 
+            <!-- Job Information -->
             <div class="application-main">
 
                 <div class="company-icon">
@@ -53,6 +66,7 @@
                 </div>
 
                 <div class="job-info">
+
                     <h2>
                         {{ application.job?.title || 'Job Position' }}
                     </h2>
@@ -62,58 +76,108 @@
                     </p>
 
                     <div class="job-meta">
+
                         <span>
-                            📍 {{ application.job?.location || 'Location not specified' }}
+                            📍
+                            {{ application.job?.location || 'Location not specified' }}
                         </span>
 
                         <span>
-                            💼 {{ application.job?.employmentType || 'Full-time' }}
+                            💼
+                            {{ application.job?.employmentType || 'Full-time' }}
                         </span>
+
                         <span>
                             💰
                             ₹{{ application.job?.salaryMin / 100000 | number:'1.1-1' }}L -
                             ₹{{ application.job?.salaryMax / 100000 | number:'1.1-1' }}L
                         </span>
+
                         <span>
-                            🎓 Min CGPA: {{ application.job?.minCgpa || 'N/A' }}
+                            🎓
+                            Min CGPA: {{ application.job?.minCgpa || 'N/A' }}
                         </span>
 
                         <span>
-                            💼 Experience: {{ application.job?.experienceRequired || 'Fresher' }}
+                            💼
+                            Experience:
+                            {{ application.job?.experienceRequired || 'Fresher' }}
                         </span>
+
                         <span>
-                            🎓 Graduation: {{ application.job?.graduationYear || 'N/A' }}
+                            🎓
+                            Graduation:
+                            {{ application.job?.graduationYear || 'N/A' }}
                         </span>
+
                     </div>
+
                 </div>
 
             </div>
 
+
+            <!-- Application Status / Actions -->
             <div class="application-side">
 
+                <!-- Status -->
                 <span class="status" [class.applied]="application.status === 'APPLIED'"
+                    [class.shortlisted]="application.status === 'SHORTLISTED'"
+                    [class.interview]="application.status === 'INTERVIEW'"
                     [class.selected]="application.status === 'SELECTED'"
                     [class.rejected]="application.status === 'REJECTED'">
+
                     @if (application.status === 'APPLIED') {
+
                     Applied
+
+                    } @else if (application.status === 'SHORTLISTED') {
+
+                    Shortlisted
+
+                    } @else if (application.status === 'INTERVIEW') {
+
+                    Interview
+
                     } @else if (application.status === 'SELECTED') {
+
                     Selected
+
                     } @else if (application.status === 'REJECTED') {
+
                     Rejected
+
                     } @else {
+
                     {{ application.status }}
+
                     }
+
                 </span>
 
+
+                <!-- Applied Date -->
                 <p class="applied-date">
+
                     Applied:
                     {{ application.appliedAt | date:'dd MMM yyyy' }}
+
                 </p>
+
+
+                <!-- View Job -->
                 <a [routerLink]="['/jobs', application.job?.jobId]" class="view-job-button">
+
                     View Job
+
                 </a>
+
+
+                <!-- Withdraw -->
                 <button type="button" class="withdraw-button" (click)="withdrawApplication(application.applicationId)">
+
                     Withdraw
+
                 </button>
 
             </div>

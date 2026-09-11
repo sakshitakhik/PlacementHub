@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Job } from '../../services/job';
+import { Job, JobData } from '../../services/job';
 @Component({
   selector: 'app-jobs',
   imports: [RouterLink, CommonModule],
@@ -9,7 +9,7 @@ import { Job } from '../../services/job';
   styleUrl: './jobs.css',
 })
 export class Jobs implements OnInit {
-  jobs: Job[] = [];
+  jobs: JobData[] = [];
   isLoading = true;
   errorMessage = '';
 
@@ -19,7 +19,7 @@ export class Jobs implements OnInit {
   }
   loadJobs(): void {
     this.jobService.getAllJobs().subscribe({
-      next: (data: Job[]) => {
+      next: (data: JobData[]) => {
         console.log('JOBS RECEIVED', data);
         this.jobs = data;
         this.isLoading = false;

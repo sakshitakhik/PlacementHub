@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-recruiter-applications',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './recruiter-applications.html',
   styleUrl: './recruiter-applications.css',
 })
@@ -50,6 +50,11 @@ export class RecruiterApplications implements OnInit {
       .subscribe({
         next: (data: ApplicationData[]) => {
           this.applications = data;
+
+          data.forEach(application => {
+            this.selectedStatuses[application.applicationId] = application.status;
+          });
+
           this.isLoading = false;
           console.log('RECRUITER APPLICATIONS:', data);
         },

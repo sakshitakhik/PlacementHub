@@ -42,8 +42,7 @@ export class Login {
             this.router.navigate(['/student-dashboard']);
           }
           else if (user.role.toLowerCase() === 'recruiter') {
-            this.router.navigate(['/recruiter-jobs']);
-
+            this.router.navigate(['/recruiter-dashboard']);
           }
           else {
             this.router.navigate(['/'])

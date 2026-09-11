@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Auth, User } from '../../services/auth';
 import { Recruiter } from '../../services/recruiter';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recruiter-jobs',
@@ -34,7 +35,8 @@ export class RecruiterJobs implements OnInit {
   errorMessage = '';
   constructor(private jobService: Job,
     private auth: Auth,
-    private recruiterService: Recruiter
+    private recruiterService: Recruiter,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +52,11 @@ export class RecruiterJobs implements OnInit {
       next: (data) => {
         this.recruiter = data;
         this.loadJobs();
+        const newJob = this.route.snapshot.queryParamMap.get('new');
+
+        if (newJob === 'true') {
+          this.openJobForm();
+        }
       },
       error: () => {
         this.errorMessage = 'Unable to load recruiter information.';
@@ -189,6 +196,9 @@ export class RecruiterJobs implements OnInit {
       }
     });
   }
+
+
+
   deleteJob(jobId: number): void {
     const confirmed = confirm('Are you sure you want to delete this job?');
 
@@ -201,10 +211,17 @@ export class RecruiterJobs implements OnInit {
         this.jobs = this.jobs.filter(
           job => job.jobId !== jobId
         );
+
+        this.errorMessage = '';
       },
       error: (error) => {
         console.error('ERROR DELETING JOB:', error);
-        this.errorMessage = 'Unable to delete the job.';
+
+        if (error.status === 409 && error.error?.message) {
+          this.errorMessage = error.error.message;
+        } else {
+          this.errorMessage = 'Unable to delete the job.';
+        }
       }
     });
   }

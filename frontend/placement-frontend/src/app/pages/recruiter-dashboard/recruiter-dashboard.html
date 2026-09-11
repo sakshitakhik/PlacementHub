@@ -1,0 +1,379 @@
+<div class="dashboard-page">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+            <p class="eyebrow">RECRUITER PORTAL</p>
+
+            <h1>Recruiter Dashboard</h1>
+
+            <p class="welcome-text">
+                Welcome back, {{ recruiter?.user?.name }}.
+                Manage your jobs and review candidates.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    @if (isLoading) {
+
+    <div class="state-card">
+
+        <p>Loading dashboard...</p>
+
+    </div>
+
+    }
+
+
+    <!-- ERROR -->
+
+    @if (!isLoading && errorMessage) {
+
+    <div class="error-card">
+
+        <p>{{ errorMessage }}</p>
+
+    </div>
+
+    }
+
+
+    @if (!isLoading && !errorMessage) {
+
+
+    <!-- SUMMARY CARDS -->
+
+    <section class="summary-grid">
+
+        <!-- JOBS -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                💼
+            </div>
+
+            <div>
+
+                <p>Jobs Posted</p>
+
+                <strong>
+                    {{ jobs.length }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPLICATIONS -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                📄
+            </div>
+
+            <div>
+
+                <p>Applications</p>
+
+                <strong>
+                    {{ applications.length }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- SHORTLISTED -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ⭐
+            </div>
+
+            <div>
+
+                <p>Shortlisted</p>
+
+                <strong>
+                    {{ getShortlistedCount() }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- SELECTED -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <p>Selected</p>
+
+                <strong>
+                    {{ getSelectedCount() }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section class="quick-actions-section">
+
+        <p class="section-label">MANAGE</p>
+
+        <h2>Quick Actions</h2>
+
+        <p class="section-description">
+            Manage your recruitment activities from here.
+        </p>
+
+
+        <div class="actions-grid">
+
+
+            <!-- MANAGE JOBS -->
+
+            <a routerLink="/recruiter-jobs" class="action-card">
+
+                <div class="action-icon">
+                    💼
+                </div>
+
+                <div class="action-content">
+
+                    <h3>Manage Jobs</h3>
+
+                    <p>
+                        View, edit and manage your existing job openings.
+                    </p>
+
+                </div>
+
+                <span class="action-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- VIEW APPLICATIONS -->
+
+            <a routerLink="/recruiter-applications" class="action-card">
+
+                <div class="action-icon">
+                    📄
+                </div>
+
+                <div class="action-content">
+
+                    <h3>View Applications</h3>
+
+                    <p>
+                        Review candidates who applied for your jobs.
+                    </p>
+
+                </div>
+
+                <span class="action-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- POST NEW JOB -->
+
+            <a [routerLink]="['/recruiter-jobs']" [queryParams]="{ new: true }" class="action-card">
+
+                <div class="action-icon">
+                    +
+                </div>
+
+                <div class="action-content">
+
+                    <h3>Post New Job</h3>
+
+                    <p>
+                        Create a new job opportunity for students.
+                    </p>
+
+                </div>
+
+                <span class="action-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- MY PROFILE -->
+
+            <a routerLink="/recruiter-profile" class="action-card">
+
+                <div class="action-icon">
+                    👤
+                </div>
+
+                <div class="action-content">
+
+                    <h3>My Profile</h3>
+
+                    <p>
+                        View and update your recruiter profile.
+                    </p>
+
+                </div>
+
+                <span class="action-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- RECENT APPLICATIONS -->
+
+    <section class="recent-section">
+
+        <p class="section-label">
+            CANDIDATES
+        </p>
+
+        <h2>Recent Applications</h2>
+
+        <p class="section-description">
+            Latest applications received for your job openings.
+        </p>
+
+
+        @if (applications.length === 0) {
+
+        <div class="empty-card">
+
+            <div class="empty-icon">
+                📄
+            </div>
+
+            <h3>No applications yet</h3>
+
+            <p>
+                Applications received for your jobs will appear here.
+            </p>
+
+        </div>
+
+        }
+
+
+        @if (applications.length > 0) {
+
+        <div class="applications-list">
+
+            @for (
+            application of getRecentApplications();
+            track application.applicationId
+            ) {
+
+            <div class="application-card">
+
+
+                <!-- CANDIDATE -->
+
+                <div class="candidate-info">
+
+                    <h3>
+                        {{ application.student.user.name }}
+                    </h3>
+
+                    <p>
+                        {{ application.student.user.email }}
+                    </p>
+
+                </div>
+
+
+                <!-- JOB -->
+
+                <div class="application-job">
+
+                    <span>Job</span>
+
+                    <strong>
+                        {{ application.job.title }}
+                    </strong>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="application-status">
+
+                    <span class="status-badge" [class.status-applied]="application.status === 'APPLIED'"
+                        [class.status-shortlisted]="application.status === 'SHORTLISTED'"
+                        [class.status-interview]="application.status === 'INTERVIEW'"
+                        [class.status-selected]="application.status === 'SELECTED'"
+                        [class.status-rejected]="application.status === 'REJECTED'">
+
+                        {{ application.status }}
+
+                    </span>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="application-date">
+
+                    {{ application.appliedAt | date:'dd MMM yyyy' }}
+
+                </div>
+
+
+            </div>
+
+            }
+
+        </div>
+
+        }
+
+
+    </section>
+
+    }
+
+</div>

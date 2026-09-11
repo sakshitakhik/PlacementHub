@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Jobs } from '../jobs/jobs';
-import { Job } from '../../services/job';
+import { Job, JobData } from '../../services/job';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-job-details',
@@ -10,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './job-details.css',
 })
 export class JobDetails implements OnInit {
-  job: Job | null = null;
+  job: JobData | null = null;
   isLoading = true;
   errorMessage = '';
 
@@ -30,7 +29,7 @@ export class JobDetails implements OnInit {
   }
   loadJob(id: number): void {
     this.jobService.getJobById(id).subscribe({
-      next: (data: Job) => {
+      next: (data: JobData) => {
         console.log('JOB DETAILS:', data);
 
         this.job = data;

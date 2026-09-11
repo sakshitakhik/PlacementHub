@@ -19,4 +19,14 @@ public class GlobalExceptionHandler {
                 exception.getMessage()
         );
     }
+    @ExceptionHandler(IllegalStateException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Map<String, String> handleIllegalStateException(
+            IllegalStateException exception) {
+
+        return Map.of(
+                "message",
+                exception.getMessage()
+        );
+    }
 }

@@ -1,0 +1,219 @@
+<div class="profile-page">
+
+    @if (toastMessage) {
+    <div class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+        {{ toastMessage }}
+    </div>
+    }
+
+    <div class="profile-header">
+
+        <div>
+            <span class="eyebrow">RECRUITER PROFILE</span>
+
+            <h1>My Profile</h1>
+
+            <p>
+                Manage your recruiter information and company details.
+            </p>
+        </div>
+
+    </div>
+
+
+    @if (isLoading) {
+
+    <div class="state-card">
+
+        <div class="loader"></div>
+
+        <p>Loading your profile...</p>
+
+    </div>
+
+    }
+
+
+    @if (!isLoading && errorMessage) {
+
+    <div class="state-card error-card">
+
+        <h3>Something went wrong</h3>
+
+        <p>{{ errorMessage }}</p>
+
+    </div>
+
+    }
+
+
+    @if (!isLoading && recruiter) {
+
+    <form class="profile-form" (ngSubmit)="updateProfile()">
+
+
+        <!-- Personal Information -->
+
+        <section class="profile-card">
+
+            <div class="section-heading">
+
+                <h2>Personal Information</h2>
+
+                <p>
+                    Your recruiter account information.
+                </p>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input id="name" type="text" [(ngModel)]="profile.name" name="name" readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input id="email" type="email" [(ngModel)]="profile.email" name="email" readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input id="phone" type="text" [(ngModel)]="profile.phone" name="phone"
+                        placeholder="Enter phone number">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="designation">
+                        Designation
+                    </label>
+
+                    <input id="designation" type="text" [(ngModel)]="profile.designation" name="designation"
+                        placeholder="e.g. HR Manager">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Company Information -->
+
+        <section class="profile-card">
+
+            <div class="section-heading">
+
+                <h2>Company Information</h2>
+
+                <p>
+                    Company details associated with your recruiter account.
+                </p>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="companyName">
+                        Company Name
+                    </label>
+
+                    <input id="companyName" type="text" [(ngModel)]="profile.companyName" name="companyName">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="industry">
+                        Industry
+                    </label>
+
+                    <input id="industry" type="text" [(ngModel)]="profile.industry" name="industry">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input id="location" type="text" [(ngModel)]="profile.location" name="location">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="website">
+                        Company Website
+                    </label>
+
+                    <input id="website" type="text" [(ngModel)]="profile.website" name="website">
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label for="description">
+                        Company Description
+                    </label>
+
+                    <textarea id="description" [(ngModel)]="profile.description" name="description" rows="5">
+            </textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Profile Actions -->
+
+        <div class="form-actions">
+
+            <button type="submit" class="save-button" [disabled]="isSaving">
+
+                @if (isSaving) {
+                Saving...
+                } @else {
+                Save Changes
+                }
+
+            </button>
+
+        </div>
+
+    </form>
+
+    }
+
+</div>

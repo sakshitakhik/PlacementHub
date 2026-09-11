@@ -5,15 +5,18 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Job;
 import com.example.demo.repository.JobRepository;
-
+import com.example.demo.repository.ApplicationRepository;
 @Service
 public class JobService {
 	private final JobRepository jobRepository;
+	private final ApplicationRepository applicationRepository;
 
-    public JobService(JobRepository jobRepository) {
-        this.jobRepository = jobRepository;
-    }
-
+	public JobService(
+	        JobRepository jobRepository,
+	        ApplicationRepository applicationRepository) {
+	    this.jobRepository = jobRepository;
+	    this.applicationRepository = applicationRepository;
+	}
     // Create job
     public Job saveJob(Job job) {
         return jobRepository.save(job);
@@ -40,8 +43,6 @@ public class JobService {
             return null;
         }
 
-        existingJob.setCompany(job.getCompany());
-        existingJob.setRecruiter(job.getRecruiter());
         existingJob.setTitle(job.getTitle());
         existingJob.setDescription(job.getDescription());
         existingJob.setLocation(job.getLocation());
@@ -52,13 +53,19 @@ public class JobService {
         existingJob.setExperienceRequired(job.getExperienceRequired());
         existingJob.setGraduationYear(job.getGraduationYear());
         existingJob.setApplicationDeadline(job.getApplicationDeadline());
-        existingJob.setStatus(job.getStatus());
 
         return jobRepository.save(existingJob);
     }
 
     // Delete job
     public void deleteJob(Long id) {
+
+        if (applicationRepository.existsByJob_JobId(id)) {
+            throw new IllegalStateException(
+                "This job cannot be deleted because candidates have already applied to it."
+            );
+        }
+
         jobRepository.deleteById(id);
     }
 }

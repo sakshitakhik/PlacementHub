@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Job } from '../../services/job';
+import { Job, JobData } from '../../services/job';
 import { Auth, User } from '../../services/auth';
 import { Application } from '../../services/application';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { Student, StudentData } from '../../services/student';
 })
 export class ApplyJob implements OnInit {
 
-  job: Job | null = null;
+  job: JobData | null = null;
   user: User | null = null;
   student: StudentData | null = null;
   coverLetter = '';
@@ -72,7 +72,7 @@ export class ApplyJob implements OnInit {
 
     this.jobService.getJobById(jobId).subscribe({
 
-      next: (data: Job) => {
+      next: (data: JobData) => {
 
         this.job = data;
 
@@ -135,7 +135,12 @@ export class ApplyJob implements OnInit {
         console.error('ERROR SUBMITTING APPLICATION:', error);
 
         this.isSubmitting = false;
-        this.errorMessage = 'Unable to submit application. Please try again.';
+
+        if (error.status === 409) {
+          this.errorMessage = 'You have already applied for this job.';
+        } else {
+          this.errorMessage = 'Unable to submit application. Please try again.';
+        }
       }
     });
   }
