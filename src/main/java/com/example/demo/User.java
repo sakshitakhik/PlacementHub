@@ -6,8 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import java.time.LocalDateTime;
-
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name="users")
 
@@ -20,6 +19,7 @@ public class User {
 	private String name;
 	@Column(name="email",nullable=false,unique=true,length=255)
 	private String email;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Column(name="password",nullable=false,length=255)
 	private String password;
 	@Column(name="role",nullable=false,length=30)

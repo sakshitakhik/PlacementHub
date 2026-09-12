@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Notification;
 import com.example.demo.repository.NotificationRepository;
-
+import java.time.LocalDateTime;
 @Service
 public class NotificationService {
 	 private final NotificationRepository notificationRepository;
@@ -23,10 +23,30 @@ public class NotificationService {
 	    public List<Notification> getAllNotifications() {
 	        return notificationRepository.findAll();
 	    }
+	    
+	 // Get notifications by user
+	    public List<Notification> getNotificationsByUserId(Long userId) {
+	        return notificationRepository.findByUser_Id(userId);
+	    }
 
 	    // Get notification by ID
 	    public Notification getNotificationById(Long id) {
 	        return notificationRepository.findById(id).orElse(null);
+	    }
+	 // Mark notification as read
+	    public Notification markAsRead(Long id) {
+
+	        Notification notification =
+	                notificationRepository.findById(id).orElse(null);
+
+	        if (notification == null) {
+	            return null;
+	        }
+
+	        notification.setIsRead(true);
+	        notification.setReadAt(LocalDateTime.now());
+
+	        return notificationRepository.save(notification);
 	    }
 
 	    // Update notification

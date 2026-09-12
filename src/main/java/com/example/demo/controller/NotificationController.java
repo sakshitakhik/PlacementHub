@@ -37,6 +37,20 @@ public class NotificationController {
 
         return notificationService.getAllNotifications();
     }
+    
+ // Get notifications by user
+    @GetMapping("/notifications/user/{userId}")
+    public List<Notification> getNotificationsByUserId(
+            @PathVariable("userId") Long userId) {
+        return notificationService.getNotificationsByUserId(userId);
+    }
+    
+    @PutMapping("/notifications/{id}/read")
+    public Notification markAsRead(
+            @PathVariable("id") Long id) {
+
+        return notificationService.markAsRead(id);
+    }
 
     // Get notification by ID
     @GetMapping("/notifications/{id}")
