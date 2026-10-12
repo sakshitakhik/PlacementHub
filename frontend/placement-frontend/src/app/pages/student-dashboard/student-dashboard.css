@@ -729,3 +729,141 @@
     }
 
 }
+
+/* ============================= */
+/* Notifications */
+/* ============================= */
+
+.notification-icon {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #244d3a;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.notification-icon:hover {
+    background-color: #f1eadc;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 1px;
+
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #c66b45;
+    color: white;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+
+/* Notification Section */
+
+.notifications-section {
+    margin-top: 32px;
+}
+
+.notification-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    padding: 20px;
+
+    margin-bottom: 14px;
+
+    background: #fffdf8;
+    border: 1px solid #e7dfd1;
+    border-radius: 14px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.notification-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(45, 61, 50, 0.08);
+}
+
+.notification-card.unread {
+    border-left: 4px solid #c66b45;
+    background: #fffaf2;
+}
+
+.notification-card-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e7efe8;
+    color: #244d3a;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.notification-content h3 {
+    margin: 0;
+    color: #244d3a;
+    font-size: 16px;
+}
+
+.notification-content p {
+    margin: 0 0 8px;
+    color: #5f625d;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.notification-content small {
+    color: #92958f;
+    font-size: 12px;
+}
+
+.unread-label {
+    padding: 4px 8px;
+
+    background: #f4dfd3;
+    color: #a65332;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}

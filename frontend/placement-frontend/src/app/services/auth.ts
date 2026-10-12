@@ -46,6 +46,16 @@ export class Auth {
     return null;
   }
 
+
+  isLoggedIn(): boolean {
+    return this.getCurrentUser() !== null;
+  }
+
+  hasRole(role: string): boolean {
+    return this.getCurrentUser()?.role?.toUpperCase() === role.toUpperCase();
+  }
+
+
   logout(): void {
     sessionStorage.removeItem('currentUser');
   }

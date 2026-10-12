@@ -1,0 +1,284 @@
+<div class="notifications-page">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">P</div>
+            <span>PlacementHub</span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a routerLink="/student-dashboard" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a routerLink="/jobs" class="nav-item">
+                <span class="nav-icon">⌕</span>
+                <span>Find Jobs</span>
+            </a>
+
+            <a routerLink="/my-applications" class="nav-item">
+                <span class="nav-icon">▣</span>
+                <span>My Applications</span>
+            </a>
+
+            <a routerLink="/student-profile" class="nav-item">
+                <span class="nav-icon">♙</span>
+                <span>My Profile</span>
+            </a>
+
+            <a routerLink="/notifications" class="nav-item active">
+                <span class="nav-icon">♧</span>
+                <span>Notifications</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button type="button" class="logout-button">
+
+                <span class="nav-icon">↪</span>
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="page-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    STUDENT PORTAL
+                </span>
+
+                <h1>Notifications</h1>
+
+                <p>
+                    Stay updated with your placement activities.
+                </p>
+
+            </div>
+
+            <div class="user-area">
+
+                <div class="user-avatar">
+                    {{ user?.name?.charAt(0)?.toUpperCase() || 'S' }}
+                </div>
+
+                <div class="user-details">
+
+                    <strong>
+                        {{ user?.name || 'Student' }}
+                    </strong>
+
+                    <span>Student</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Notification Summary -->
+        <section class="summary-card">
+
+            <div class="summary-icon">
+                ♧
+            </div>
+
+            <div>
+
+                <span class="summary-label">
+                    NOTIFICATIONS
+                </span>
+
+                <h2>
+                    {{ notifications.length }}
+                </h2>
+
+                <p>
+                    {{ getUnreadCount() }}
+                    unread notification{{ getUnreadCount() === 1 ? '' : 's' }}
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Notifications -->
+        <section class="notifications-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        UPDATES
+                    </span>
+
+                    <h2>
+                        Your notifications
+                    </h2>
+
+                </div>
+
+                <a routerLink="/student-dashboard" class="back-button">
+                    ← Dashboard
+                </a>
+
+            </div>
+
+
+            <!-- Loading -->
+            @if (isLoading) {
+
+            <div class="state-card">
+
+                <div class="loading-icon">
+                    ◷
+                </div>
+
+                <h3>
+                    Loading notifications...
+                </h3>
+
+                <p>
+                    Please wait while we fetch your latest updates.
+                </p>
+
+            </div>
+
+            }
+
+
+            <!-- Error -->
+            @if (!isLoading && errorMessage) {
+
+            <div class="state-card error-card">
+
+                <div class="state-icon">
+                    !
+                </div>
+
+                <h3>
+                    Something went wrong
+                </h3>
+
+                <p>
+                    {{ errorMessage }}
+                </p>
+
+            </div>
+
+            }
+
+
+            <!-- Notifications List -->
+            @if (!isLoading && !errorMessage && notifications.length > 0) {
+
+            @for (
+            notification of notifications;
+            track notification.notificationId
+            ) {
+
+            <div class="notification-card" [class.unread]="!notification.isRead">
+
+                <div class="notification-card-icon">
+                    ♧
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            {{ notification.title }}
+                        </h3>
+
+                        @if (!notification.isRead) {
+
+                        <span class="unread-label">
+                            New
+                        </span>
+
+                        }
+
+                    </div>
+
+                    <p>
+                        {{ notification.message }}
+                    </p>
+
+                    <small>
+                        {{ notification.createdAt | date:'medium' }}
+                    </small>
+                    @if (!notification.isRead) {
+
+  <button
+    type="button"
+    class="mark-read-button"
+    (click)="markAsRead(notification)">
+    Mark as read
+  </button>
+
+} @else {
+
+  <span class="read-label">
+    ✓ Read
+  </span>
+
+}
+
+                </div>
+
+            </div>
+
+            }
+
+            }
+
+
+            <!-- Empty -->
+            @if (
+            !isLoading &&
+            !errorMessage &&
+            notifications.length === 0
+            ) {
+
+            <div class="state-card">
+
+                <div class="state-icon">
+                    ✓
+                </div>
+
+                <h3>
+                    No notifications
+                </h3>
+
+                <p>
+                    You're all caught up!
+                </p>
+
+            </div>
+
+            }
+
+        </section>
+
+    </main>
+
+</div>

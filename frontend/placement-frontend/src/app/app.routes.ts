@@ -13,7 +13,8 @@ import { RecruiterJobs } from './pages/recruiter-jobs/recruiter-jobs';
 import { StudentProfile } from './pages/student-profile/student-profile';
 import { RecruiterDashboard } from './pages/recruiter-dashboard/recruiter-dashboard';
 import { RecruiterProfile } from './pages/recruiter-profile/recruiter-profile';
-
+import { Notifications } from './pages/notifications/notifications';
+import { authGuard } from './auth-guard';
 export const routes: Routes = [
   {
     path: '',
@@ -29,11 +30,15 @@ export const routes: Routes = [
   },
   {
     path: 'student-dashboard',
-    component: StudentDashboard
+    component: StudentDashboard,
+    canActivate: [authGuard],
+    data: { role: 'STUDENT' }
   },
   {
     path: 'recruiter-dashboard',
-    component: RecruiterDashboard
+    component: RecruiterDashboard,
+    canActivate: [authGuard],
+    data: { role: 'RECRUITER' }
   },
   {
     path: 'jobs',
@@ -66,6 +71,10 @@ export const routes: Routes = [
   {
     path: 'recruiter-profile',
     component: RecruiterProfile
+  },
+  {
+    path: 'notifications',
+    component: Notifications
   }
 
 ];

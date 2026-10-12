@@ -30,7 +30,7 @@
         <span>My Profile</span>
       </a>
 
-      <a href="#" class="nav-item">
+      <a href="/notifications" class="nav-item">
         <span class="nav-icon">♧</span>
         <span>Notifications</span>
       </a>
@@ -69,6 +69,12 @@
 
         <div class="notification-icon">
           ♧
+
+          @if (unreadNotifications > 0) {
+          <span class="notification-badge">
+            {{ unreadNotifications }}
+          </span>
+          }
         </div>
 
         <div class="user-avatar">
@@ -192,7 +198,7 @@
         <div class="stat-content">
           <span class="stat-label">PROFILE</span>
 
-          <strong>70%</strong>
+          <strong>{{profileCompletion}}</strong>
 
           <small>
             Profile completed
@@ -203,6 +209,77 @@
 
     </section>
 
+    <!-- Notifications -->
+    <section class="notifications-section">
+
+      <div class="section-header">
+
+        <div>
+          <span class="section-label">UPDATES</span>
+
+          <h2>Notifications</h2>
+        </div>
+
+      </div>
+
+
+      @if (notifications.length > 0) {
+
+      @for (notification of notifications; track notification.notificationId) {
+
+      <div class="notification-card" [class.unread]="!notification.isRead">
+
+        <div class="notification-card-icon">
+          ♧
+        </div>
+
+        <div class="notification-content">
+
+          <div class="notification-title-row">
+
+            <h3>
+              {{ notification.title }}
+            </h3>
+
+            @if (!notification.isRead) {
+            <span class="unread-label">New</span>
+            }
+
+          </div>
+
+          <p>
+            {{ notification.message }}
+          </p>
+
+          <small>
+            {{ notification.createdAt | date:'medium' }}
+          </small>
+
+        </div>
+
+      </div>
+
+      }
+
+      } @else {
+
+      <div class="notification-card">
+
+        <div class="notification-content">
+
+          <h3>No notifications</h3>
+
+          <p>
+            You're all caught up!
+          </p>
+
+        </div>
+
+      </div>
+
+      }
+
+    </section>
 
     <!-- Recommended Jobs -->
     <section class="jobs-section">
@@ -222,78 +299,70 @@
       </div>
 
 
-      <!-- Job 1 -->
+      <!-- Dynamic Recommended Jobs -->
+      @if (recommendedJobs.length > 0) {
+
+      @for (job of recommendedJobs; track job.jobId) {
+
       <div class="job-card">
 
         <div class="job-company-icon">
-          I
+          {{ job.company?.name?.charAt(0)?.toUpperCase() || 'C' }}
         </div>
 
         <div class="job-info">
 
           <span class="job-type">
-            FULL TIME
+            {{ job.employmentType }}
           </span>
 
           <h3>
-            Software Developer
+            {{ job.title }}
           </h3>
 
           <p>
-            Infosys · Pune
+            {{ job.company?.name || 'Company' }} · {{ job.location }}
           </p>
 
           <div class="job-details">
-            ₹4.5 – 7 LPA
+
+            ₹{{ job.salaryMin / 100000 | number:'1.1-1' }}
+            –
+            {{ job.salaryMax / 100000 | number:'1.1-1' }} LPA
+
             <span>•</span>
-            IT / Software
+
+            {{ job.company?.industry || 'IT / Software' }}
+
           </div>
 
         </div>
 
-        <a [routerLink]="['/jobs', 1]" class="view-job-button">
-
+        <a [routerLink]="['/jobs', job.jobId]" class="view-job-button">
           View Job →
         </a>
 
       </div>
 
+      }
 
-      <!-- Job 2 -->
+      } @else {
+
       <div class="job-card">
 
-        <div class="job-company-icon tata-icon">
-          T
-        </div>
-
         <div class="job-info">
 
-          <span class="job-type">
-            FULL TIME
-          </span>
-
-          <h3>
-            Graduate Engineer
-          </h3>
+          <h3>No jobs available right now</h3>
 
           <p>
-            Tata Consultancy Services · Pune
+            Check back later for new placement opportunities.
           </p>
-
-          <div class="job-details">
-            ₹4 – 6 LPA
-            <span>•</span>
-            Engineering
-          </div>
 
         </div>
 
-        <a [routerLink]="['/jobs', 2]" class="view-job-button">
-
-          View Job →
-        </a>
-
       </div>
+
+      }
 
 
       <!-- Browse Jobs -->

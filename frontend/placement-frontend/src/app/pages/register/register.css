@@ -1,0 +1,130 @@
+.register-page {
+  min-height: 100vh;
+  padding: 40px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f7f4ec;
+  box-sizing: border-box;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 32px;
+  background: #fffefa;
+  border: 1px solid #e7e1d5;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(39, 63, 48, 0.08);
+}
+
+h1 {
+  margin: 0 0 8px;
+  color: #244b37;
+  font-size: 27px;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  color: #706f67;
+  line-height: 1.5;
+}
+
+.account-options {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.account-options button {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #d8dfd5;
+  border-radius: 8px;
+  background: #fffefa;
+  color: #244b37;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.account-options button.selected {
+  background: #244b37;
+  border-color: #244b37;
+  color: white;
+}
+
+label {
+  display: block;
+  margin: 16px 0 7px;
+  color: #34483a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #d8d8cf;
+  border-radius: 8px;
+  background: white;
+  color: #282d29;
+  font: inherit;
+}
+
+input:focus {
+  outline: 2px solid #8aa18e;
+  border-color: #476d52;
+}
+
+h2 {
+  margin: 26px 0 4px;
+  color: #244b37;
+  font-size: 18px;
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 24px;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #315b42;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #244530;
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.success-message {
+  padding: 10px;
+  border-radius: 6px;
+  background: #edf5eb;
+  color: #285a35;
+}
+
+.error-message {
+  padding: 10px;
+  border-radius: 6px;
+  background: #faece8;
+  color: #a23b2a;
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 22px 18px;
+  }
+
+  h1 {
+    font-size: 23px;
+  }
+}

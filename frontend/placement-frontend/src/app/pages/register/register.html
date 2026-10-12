@@ -1,1 +1,157 @@
-<p>register works!</p>
+<main class="register-page">
+  <section class="register-card">
+    <h1>Create your PlacementHub account</h1>
+    <p class="subtitle">Choose your account type to get started.</p>
+
+    <div class="account-options">
+      <button
+        type="button"
+        [class.selected]="accountType === 'STUDENT'"
+        (click)="accountType = 'STUDENT'"
+      >
+        Student
+      </button>
+
+      <button
+        type="button"
+        [class.selected]="accountType === 'RECRUITER'"
+        (click)="accountType = 'RECRUITER'"
+      >
+        Recruiter
+      </button>
+    </div>
+
+    <form #registerForm="ngForm" (ngSubmit)="register()">
+      <label for="name">Full name</label>
+      <input
+        id="name"
+        name="name"
+        [(ngModel)]="name"
+        required
+        maxlength="100"
+        placeholder="Enter your full name"
+      />
+
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        [(ngModel)]="email"
+        required
+        email
+        placeholder="you@example.com"
+      />
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        [(ngModel)]="password"
+        required
+        minlength="6"
+        placeholder="Create a password"
+      />
+
+      <label for="phone">Phone number</label>
+      <input
+        id="phone"
+        name="phone"
+        type="tel"
+        [(ngModel)]="phone"
+        placeholder="Enter your phone number"
+      />
+
+      @if (accountType === 'STUDENT') {
+        <h2>Student details</h2>
+
+        <label for="college">College</label>
+        <input
+          id="college"
+          name="college"
+          [(ngModel)]="college"
+          placeholder="Enter your college name"
+        />
+
+        <label for="branch">Branch</label>
+        <input
+          id="branch"
+          name="branch"
+          [(ngModel)]="branch"
+          placeholder="e.g. Information Technology"
+        />
+
+        <label for="graduationYear">Graduation year</label>
+        <input
+          id="graduationYear"
+          name="graduationYear"
+          type="number"
+          [(ngModel)]="graduationYear"
+          min="2000"
+          max="2100"
+          placeholder="e.g. 2026"
+        />
+      } @else {
+        <h2>Company details</h2>
+
+        <label for="companyName">Company name</label>
+        <input
+          id="companyName"
+          name="companyName"
+          [(ngModel)]="companyName"
+          required
+          placeholder="Enter your company name"
+        />
+
+        <label for="industry">Industry</label>
+        <input
+          id="industry"
+          name="industry"
+          [(ngModel)]="industry"
+          placeholder="e.g. Information Technology"
+        />
+
+        <label for="location">Company location</label>
+        <input
+          id="location"
+          name="location"
+          [(ngModel)]="location"
+          placeholder="e.g. Pune"
+        />
+
+        <label for="website">Company website</label>
+        <input
+          id="website"
+          name="website"
+          [(ngModel)]="website"
+          placeholder="https://example.com"
+        />
+
+        <label for="designation">Your designation</label>
+        <input
+          id="designation"
+          name="designation"
+          [(ngModel)]="designation"
+          placeholder="e.g. HR Recruiter"
+        />
+      }
+
+      @if (message) {
+        <p class="success-message">{{ message }}</p>
+      }
+
+      @if (errorMessage) {
+        <p class="error-message">{{ errorMessage }}</p>
+      }
+
+      <button
+        class="submit-button"
+        type="submit"
+        [disabled]="registerForm.invalid || isLoading"
+      >
+        {{ isLoading ? 'Registering...' : 'Create account' }}
+      </button>
+    </form>
+  </section>
+</main>
